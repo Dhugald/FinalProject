@@ -27,10 +27,6 @@ namespace AdventureGame
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
-            
-            Console.WriteLine("hello");
-            Console.WriteLine("test");
-            Console.WriteLine("test2");
         }
     }
 }
