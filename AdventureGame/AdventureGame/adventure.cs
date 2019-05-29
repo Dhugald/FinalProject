@@ -65,6 +65,16 @@ namespace AdventureGame
 
         }
 
+        public static void GameInitialization()
+        {
+
+        }
+
+        public static void MainMenu()
+        {
+    
+        }
+
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
