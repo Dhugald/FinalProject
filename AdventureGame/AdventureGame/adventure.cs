@@ -11,6 +11,7 @@ namespace AdventureGame
         static void Main(string[] args)
         {
             Console.WriteLine("hello");
+            Console.WriteLine("test");
         }
     }
 }
