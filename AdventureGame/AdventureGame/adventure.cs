@@ -12,6 +12,7 @@ namespace AdventureGame
         {
             Console.WriteLine("hello");
             Console.WriteLine("test");
+            Console.WriteLine("test2");
         }
     }
 }
