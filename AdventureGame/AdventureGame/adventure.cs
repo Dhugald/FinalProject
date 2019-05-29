@@ -78,7 +78,7 @@ namespace AdventureGame
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
-            
+            Planet[] planets = new Planet[8];
             Console.WriteLine("hello");
             Console.WriteLine("test");
             Console.WriteLine("test2");
