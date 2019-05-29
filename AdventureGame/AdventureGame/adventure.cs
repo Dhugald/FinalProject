@@ -35,15 +35,17 @@ namespace AdventureGame
 
         }
 
-        public static void Venus()
+        public static void Venus(Planet[] planets)
         {
-
+            planets[10].environmnet = "something";
+            planets[10].name = "Venus";
 
         }
 
-        public static void Mars()
+        public static void Mars(Planet[] planets)
         {
-
+            planets[9].environmnet = "something";
+            planets[9].name = "Venus";
         }
 
         public static void Jupiter()
@@ -67,7 +69,6 @@ namespace AdventureGame
 
         public static void GameInitialization()
         {
-
         }
 
         public static void MainMenu()
@@ -82,6 +83,9 @@ namespace AdventureGame
             Console.WriteLine("hello");
             Console.WriteLine("test");
             Console.WriteLine("test2");
+
+            int i = new int[10];
+            i[0] = 20
         }
     }
 }
