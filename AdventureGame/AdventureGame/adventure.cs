@@ -10,7 +10,7 @@ namespace AdventureGame
     {
         public struct Player
         {
-            public int researchPoints;         
+            public int researchPoints;
         }
         public struct Ship
         {
@@ -24,6 +24,47 @@ namespace AdventureGame
             public int fuelLevel;
             public bool task;
         }
+
+        public static void Earth()
+        {
+
+        }
+        public static void Mercury()
+        {
+
+
+        }
+
+        public static void Venus()
+        {
+
+
+        }
+
+        public static void Mars()
+        {
+
+        }
+
+        public static void Jupiter()
+        {
+
+        }
+
+        public static void Saturn()
+        {
+
+        }
+        public static void Uranus()
+        {
+
+        }
+
+        public static void Neptune()
+        {
+
+        }
+
         static void Main(string[] args)
         {
             string[] inventory = new string[7];

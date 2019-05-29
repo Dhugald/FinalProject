@@ -22,3 +22,9 @@ Get enough fuel to travel in the solar system, start on earth and explore all th
 
 Each planet has a minimum amount of fuel and has the chance to give extra to help explore different planets. Research points help decide if it’s worth going to the planet for supplies. 
 Keys and puzzles on planets to find rewards / open rooms.
+
+
+3 game settings, Easy, Medium, hard. difficulty changes ship health, and fuel
+
+Inventory size 7.  
+
