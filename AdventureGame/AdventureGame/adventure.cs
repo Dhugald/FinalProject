@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace AdventureGame
 {
@@ -45,30 +46,53 @@ namespace AdventureGame
         public static void Mars(Planet[] planets)
         {
             planets[9].environmnet = "something";
-            planets[9].name = "Venus";
+            planets[9].name = "Mars";
         }
 
-        public static void Jupiter()
+        public static void Jupiter(Planet[] planets)
         {
-
+            planets[8].environmnet = "something";
+            planets[8].name = "Jupiter";
         }
 
-        public static void Saturn()
+        public static void Saturn(Planet[] planets)
         {
-
+            planets[7].environmnet = "something";
+            planets[7].name = "Saturn";
         }
-        public static void Uranus()
+        public static void Uranus(Planet[] planets)
         {
-
+            planets[6].environmnet = "something";
+            planets[6].name = "Uranus";
         }
 
-        public static void Neptune()
+        public static void Neptune(Planet[] planets)
         {
-
+            planets[5].environmnet = "something";
+            planets[5].name = "Neptune";
         }
 
         public static void GameInitialization()
         {
+
+        }
+
+        public static void StartUp()
+        {
+            Console.Title = "ASCII Art";
+            string title = @"
+            
+  ____  _                  _        _   _                       ___________
+ |  _ \| | __ _ _ __   ___| |_     | | | | ___  _ __           /@@@      @@\       __               _______
+ | |_) | |/ _` | '_ \ / _ \ __|    | |_| |/ _ \| '_ \         /         @@@ \         \            /       \
+ |  __/| | (_| | | | |  __/ |_     |  _  | (_) | |_) |       |  @@@@     @@  |         \___\    ==|=========|==
+ |_|   |_|\__,_|_| |_|\___|\__|    |_| |_|\___/| .__/         \   @@@       /              /       \_______/
+                                               |_|             \__@@_____@@/
+
+                    ";
+            Console.WriteLine(title);
+
+
 
         }
 
@@ -133,9 +157,10 @@ namespace AdventureGame
         {
             string[] inventory = new string[7];
             Planet[] planets = new Planet[8];
-            
 
+            StartUp();
             MainMenu();
+            
         }
     }
 }
