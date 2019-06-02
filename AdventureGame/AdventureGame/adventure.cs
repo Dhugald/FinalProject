@@ -87,7 +87,10 @@ namespace AdventureGame
         {
             s.location = "earth";
         }
-        public static void 
+        public static void playerSetup(ref Player p)
+        {
+            p.inShip = true;
+        }
         public static void GameInitialization(Player p, ref Ship s)
         {
             shipSetup(ref s);
@@ -204,44 +207,51 @@ namespace AdventureGame
                     break;
             }
         }
-        public static void travel(ref Ship s, string input)
+        public static void travel(ref Ship s,Player p, string input)
         {
             if (input != s.location)
             {
-                flyEvent(s);
-                switch (input)
+                if (!p.inShip)
                 {
-                    case "mercury":
-                        s.location = "mercury";
-                        Console.WriteLine("You successfully arrived to mecury.");
-                        break;
-                    case "venus":
-                        s.location = "venus";
-                        Console.WriteLine("You successfully arrived to venus.");
-                        break;
-                    case "earth":
-                        s.location = "earth";
-                        Console.WriteLine("You successfully arrived to earth.");
-                        break;
-                    case "mars":
-                        s.location = "mars";
-                        Console.WriteLine("You successfully arrived to mars.");
-                        break;
-                    case "jupiter":
-                        s.location = "jupiter";
-                        Console.WriteLine("You successfully arrived to jupiter.");
-                        break;
-                    case "uranus":
-                        s.location = "uranus";
-                        Console.WriteLine("You successfully arrived to uranus.");
-                        break;
-                    case "neptune":
-                        s.location = "neptune";
-                        Console.WriteLine("You successfully arrived to neptune.");
-                        break;
-                    default:
-                        Console.Write("Invaild planet");
-                        break;
+                    flyEvent(s);
+                    switch (input)
+                    {
+                        case "mercury":
+                            s.location = "mercury";
+                            Console.WriteLine("You successfully arrived to mecury.\n");
+                            break;
+                        case "venus":
+                            s.location = "venus";
+                            Console.WriteLine("You successfully arrived to venus.\n");
+                            break;
+                        case "earth":
+                            s.location = "earth";
+                            Console.WriteLine("You successfully arrived to earth.\n");
+                            break;
+                        case "mars":
+                            s.location = "mars";
+                            Console.WriteLine("You successfully arrived to mars.\n");
+                            break;
+                        case "jupiter":
+                            s.location = "jupiter";
+                            Console.WriteLine("You successfully arrived to jupiter.\n");
+                            break;
+                        case "uranus":
+                            s.location = "uranus";
+                            Console.WriteLine("You successfully arrived to uranus.\n");
+                            break;
+                        case "neptune":
+                            s.location = "neptune";
+                            Console.WriteLine("You successfully arrived to neptune.\n");
+                            break;
+                        default:
+                            Console.Write("Invaild planet");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You are not in a ship");
                 }
             }
             else
@@ -249,6 +259,12 @@ namespace AdventureGame
                 Console.WriteLine("You are already here!");
             }
 
+        }
+        public static void cmdList()
+        {
+            Console.WriteLine("goto - To fly to a planet");
+            Console.WriteLine("exit - To exit ship");
+            Console.WriteLine("Enter - To enter ship");
         }
         static void Main(string[] args)
         {
@@ -262,19 +278,21 @@ namespace AdventureGame
             Console.WriteLine(s.location);
             while (true)
             {
-
+                cmdList();
                 string input = Console.ReadLine().ToLower();
 
                 if (input == "goto")
                 {
+                    
                     Console.WriteLine("Enter planet to fly to: ");
                     input = Console.ReadLine().ToLower();
-                    travel(ref s, input);
+                    travel(ref s,p, input);
 
                 }
                 else if (input == "exit")
                 {
-                    player
+                    p.inShip = false;
+                    Console.WriteLine("You exited the ship");
                 }
             }
         }
