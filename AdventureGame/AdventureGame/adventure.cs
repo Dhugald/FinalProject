@@ -82,13 +82,13 @@ namespace AdventureGame
         }
 
 
-        public static void shipSetup(Ship s)
+        public static void shipSetup(ref Ship s)
         {
             s.location = "earth";
         }
-        public static void GameInitialization(Player p, Ship s)
+        public static void GameInitialization(Player p, ref Ship s)
         {
-            shipSetup(s);
+            shipSetup(ref s);
 
         }
 
@@ -132,7 +132,7 @@ namespace AdventureGame
         }
         public static void SetDifficulty()
         {
-                      Console.WriteLine("Please select a difficulty: ");
+            Console.WriteLine("Please select a difficulty: ");
             Console.WriteLine("1        Easy");
             Console.WriteLine("2        Regular");
             Console.WriteLine("3        Hard");
@@ -170,17 +170,60 @@ namespace AdventureGame
             Console.ReadLine();
         }
 
-        
+        public static void travel(ref Ship s, string input)
+        {
+            switch (input)
+            {
+                case "mercury":
+                    s.location = "mercury";
+                    break;
+                case "venus":
+                    s.location = "venus";
+                    break;
+                case "earth":
+                    s.location = "earth";
+                    break;
+                case "mars":
+                    s.location = "mars";
+                    break;
+                case "jupiter":
+                    s.location = "jupiter";
+                    break;
+                case "uranus":
+                    s.location = "uranus";
+                    break;
+                case "neptune":
+                    s.location = "neptune";
+                    break;
+                default:
+                    Console.Write("Invaild planet");
+                    break;
+            }
+
+        }
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
             Planet[] planets = new Planet[8];
-            Ship s = new Ship;
+            Ship s = new Ship();
             Player p = new Player();
-            GameInitialization(p,s);
+            GameInitialization(p, ref s);
             StartUp();
             MainMenu();
-            
+            Console.WriteLine(s.location);
+            while (true)
+            {
+
+                string input = Console.ReadLine().ToLower();
+          
+                if (input == "goto")
+                {
+                    Console.WriteLine("Enter planet to fly to: ");
+                    input = Console.ReadLine().ToLower();
+                    travel(ref s, input);
+                   
+                }
+            }
         }
     }
 }
