@@ -12,6 +12,7 @@ namespace AdventureGame
         public struct Player
         {
             public int researchPoints;
+            public bool inShip;
         }
         public struct Ship
         {
@@ -86,6 +87,7 @@ namespace AdventureGame
         {
             s.location = "earth";
         }
+        public static void 
         public static void GameInitialization(Player p, ref Ship s)
         {
             shipSetup(ref s);
@@ -169,35 +171,82 @@ namespace AdventureGame
             Console.WriteLine($"The ships starting fuel is: {shipStats[0].fuel}");
             Console.ReadLine();
         }
-
-        public static void travel(ref Ship s, string input)
+        public static void flyEvent(Ship s)
         {
-            switch (input)
+            Random rand = new Random();
+            switch(rand.Next(1,11))
             {
-                case "mercury":
-                    s.location = "mercury";
+                case 1:
+                    Console.WriteLine("Encounter space pirates");
                     break;
-                case "venus":
-                    s.location = "venus";
+                case 2:
                     break;
-                case "earth":
-                    s.location = "earth";
+                case 3:
                     break;
-                case "mars":
-                    s.location = "mars";
+                case 4:
+                    Console.WriteLine("Encounter space pirates");
                     break;
-                case "jupiter":
-                    s.location = "jupiter";
+                case 5:
                     break;
-                case "uranus":
-                    s.location = "uranus";
+                case 6:
                     break;
-                case "neptune":
-                    s.location = "neptune";
+                case 7:
+                    break;
+                case 8:
+                    Console.WriteLine("Encounter comets");
+                    break;
+                case 9:
+                    Console.WriteLine("Encounter comets");
+                    break;
+                case 10:
                     break;
                 default:
-                    Console.Write("Invaild planet");
                     break;
+            }
+        }
+        public static void travel(ref Ship s, string input)
+        {
+            if (input != s.location)
+            {
+                flyEvent(s);
+                switch (input)
+                {
+                    case "mercury":
+                        s.location = "mercury";
+                        Console.WriteLine("You successfully arrived to mecury.");
+                        break;
+                    case "venus":
+                        s.location = "venus";
+                        Console.WriteLine("You successfully arrived to venus.");
+                        break;
+                    case "earth":
+                        s.location = "earth";
+                        Console.WriteLine("You successfully arrived to earth.");
+                        break;
+                    case "mars":
+                        s.location = "mars";
+                        Console.WriteLine("You successfully arrived to mars.");
+                        break;
+                    case "jupiter":
+                        s.location = "jupiter";
+                        Console.WriteLine("You successfully arrived to jupiter.");
+                        break;
+                    case "uranus":
+                        s.location = "uranus";
+                        Console.WriteLine("You successfully arrived to uranus.");
+                        break;
+                    case "neptune":
+                        s.location = "neptune";
+                        Console.WriteLine("You successfully arrived to neptune.");
+                        break;
+                    default:
+                        Console.Write("Invaild planet");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You are already here!");
             }
 
         }
@@ -215,13 +264,17 @@ namespace AdventureGame
             {
 
                 string input = Console.ReadLine().ToLower();
-          
+
                 if (input == "goto")
                 {
                     Console.WriteLine("Enter planet to fly to: ");
                     input = Console.ReadLine().ToLower();
                     travel(ref s, input);
-                   
+
+                }
+                else if (input == "exit")
+                {
+                    player
                 }
             }
         }
