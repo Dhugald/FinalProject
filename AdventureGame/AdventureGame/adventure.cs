@@ -91,9 +91,10 @@ namespace AdventureGame
         {
             p.inShip = true;
         }
-        public static void GameInitialization(Player p, ref Ship s)
+        public static void GameInitialization(ref Player p, ref Ship s)
         {
             shipSetup(ref s);
+            playerSetup(ref p);
 
         }
 
@@ -211,7 +212,7 @@ namespace AdventureGame
         {
             if (input != s.location)
             {
-                if (!p.inShip)
+                if (p.inShip)
                 {
                     flyEvent(s);
                     switch (input)
@@ -262,9 +263,9 @@ namespace AdventureGame
         }
         public static void cmdList()
         {
-            Console.WriteLine("goto - To fly to a planet");
-            Console.WriteLine("exit - To exit ship");
-            Console.WriteLine("Enter - To enter ship");
+            Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
+            Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
+            Console.WriteLine("Enter".PadRight(7) + "- To enter ship");
         }
         static void Main(string[] args)
         {
@@ -272,16 +273,16 @@ namespace AdventureGame
             Planet[] planets = new Planet[8];
             Ship s = new Ship();
             Player p = new Player();
-            GameInitialization(p, ref s);
+            GameInitialization(ref p, ref s);
             StartUp();
             MainMenu();
-            Console.WriteLine(s.location);
             while (true)
             {
                 cmdList();
+                Console.WriteLine(p.inShip);
                 string input = Console.ReadLine().ToLower();
 
-                if (input == "goto")
+                if (input == "fly")
                 {
                     
                     Console.WriteLine("Enter planet to fly to: ");
@@ -292,6 +293,11 @@ namespace AdventureGame
                 else if (input == "exit")
                 {
                     p.inShip = false;
+                    Console.WriteLine("You exited the ship");
+                }
+                else if (input == "enter")
+                {
+                    p.inShip = true;
                     Console.WriteLine("You exited the ship");
                 }
             }
