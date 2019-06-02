@@ -17,65 +17,81 @@ namespace AdventureGame
         {
             public int health;
             public int fuel;
+            public string location;
         }
         public struct Planet
         {
             public string name;
             public string environmnet;
-            public int fuelLevel;
+            public int fuelDistance;
             public bool task;
         }
 
-        public static void Earth()
+        public static void Earth(Planet[] planets)
         {
-
+            planets[3].name = "Earth";
+            planets[3].fuelDistance = 60;
         }
-        public static void Mercury()
+        public static void Mercury(Planet[] planets)
         {
-
+            planets[1].name = "Mercury";
+            planets[1].fuelDistance = 60;
 
         }
 
         public static void Venus(Planet[] planets)
         {
-            planets[10].environmnet = "something";
-            planets[10].name = "Venus";
+            planets[2].environmnet = "something";
+            planets[2].name = "Venus";
+            planets[2].fuelDistance = 60;
 
         }
 
         public static void Mars(Planet[] planets)
         {
-            planets[9].environmnet = "something";
-            planets[9].name = "Mars";
+            planets[4].environmnet = "something";
+            planets[4].name = "Mars";
+            planets[4].fuelDistance = 60;
         }
 
         public static void Jupiter(Planet[] planets)
         {
-            planets[8].environmnet = "something";
-            planets[8].name = "Jupiter";
+            planets[5].environmnet = "something";
+            planets[5].name = "Jupiter";
+            planets[5].fuelDistance = 60;
         }
 
         public static void Saturn(Planet[] planets)
         {
-            planets[7].environmnet = "something";
-            planets[7].name = "Saturn";
+            planets[6].environmnet = "something";
+            planets[6].name = "Saturn";
+            planets[6].fuelDistance = 60;
         }
         public static void Uranus(Planet[] planets)
         {
-            planets[6].environmnet = "something";
-            planets[6].name = "Uranus";
+            planets[7].environmnet = "something";
+            planets[7].name = "Uranus";
+            planets[7].fuelDistance = 60;
         }
 
         public static void Neptune(Planet[] planets)
         {
-            planets[5].environmnet = "something";
-            planets[5].name = "Neptune";
+            planets[8].environmnet = "something";
+            planets[8].name = "Neptune";
+            planets[8].fuelDistance = 60;
         }
 
-        public static void GameInitialization()
+
+        public static void shipSetup(Ship s)
         {
+            s.location = "earth";
+        }
+        public static void GameInitialization(Player p, Ship s)
+        {
+            shipSetup(s);
 
         }
+
 
         public static void StartUp()
         {
@@ -153,11 +169,15 @@ namespace AdventureGame
             Console.WriteLine($"The ships starting fuel is: {shipStats[0].fuel}");
             Console.ReadLine();
         }
+
+        
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
             Planet[] planets = new Planet[8];
-
+            Ship s = new Ship;
+            Player p = new Player();
+            GameInitialization(p,s);
             StartUp();
             MainMenu();
             
