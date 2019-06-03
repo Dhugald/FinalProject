@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Threading;
 
 namespace AdventureGame
 {
@@ -27,59 +28,56 @@ namespace AdventureGame
             public int fuelDistance;
             public bool task;
         }
-
-        public static void Earth(Planet[] planets)
-        {
-            planets[3].name = "Earth";
-            planets[3].fuelDistance = 60;
-        }
-        public static void Mercury(Planet[] planets)
-        {
-            planets[1].name = "Mercury";
-            planets[1].fuelDistance = 60;
-
-        }
-
         public static void Venus(Planet[] planets)
         {
             planets[2].environmnet = "something";
             planets[2].name = "Venus";
-            planets[2].fuelDistance = 60;
+            planets[2].fuelDistance = 50;
+        }
+        public static void Mercury(Planet[] planets)
+        {
+            planets[1].name = "Mercury";
+            planets[1].fuelDistance = 50;
 
+        }
+        public static void Earth(Planet[] planets)
+        {
+            planets[3].name = "Earth";
+            planets[3].fuelDistance = 50;
         }
 
         public static void Mars(Planet[] planets)
         {
             planets[4].environmnet = "something";
             planets[4].name = "Mars";
-            planets[4].fuelDistance = 60;
+            planets[4].fuelDistance = 50;
         }
 
         public static void Jupiter(Planet[] planets)
         {
             planets[5].environmnet = "something";
             planets[5].name = "Jupiter";
-            planets[5].fuelDistance = 60;
+            planets[5].fuelDistance = 50;
         }
 
         public static void Saturn(Planet[] planets)
         {
             planets[6].environmnet = "something";
             planets[6].name = "Saturn";
-            planets[6].fuelDistance = 60;
+            planets[6].fuelDistance = 50;
         }
         public static void Uranus(Planet[] planets)
         {
             planets[7].environmnet = "something";
             planets[7].name = "Uranus";
-            planets[7].fuelDistance = 60;
+            planets[7].fuelDistance = 50;
         }
 
         public static void Neptune(Planet[] planets)
         {
             planets[8].environmnet = "something";
             planets[8].name = "Neptune";
-            planets[8].fuelDistance = 60;
+            planets[8].fuelDistance = 50;
         }
 
 
@@ -113,8 +111,8 @@ namespace AdventureGame
 
                     ";
             Console.WriteLine(title);
-
-
+            Thread.Sleep(2000);
+            Console.Clear();
 
         }
 
