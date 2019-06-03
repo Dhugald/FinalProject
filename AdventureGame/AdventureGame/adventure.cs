@@ -92,7 +92,7 @@ namespace AdventureGame
         }
         public static void SetDifficulty()
         {
-                      Console.WriteLine("Please select a difficulty: ");
+            Console.WriteLine("Please select a difficulty: ");
             Console.WriteLine("1        Easy");
             Console.WriteLine("2        Regular");
             Console.WriteLine("3        Hard");
