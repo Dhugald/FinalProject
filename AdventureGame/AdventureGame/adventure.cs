@@ -88,8 +88,7 @@ namespace AdventureGame
         }
         public static void Uranus(Planet[] planets)
         {
-            planets[7].environmnet = "something";
-            planets[7].name = "Uranus";
+
             planets[7].fuelDistance = 50;
         }
 
