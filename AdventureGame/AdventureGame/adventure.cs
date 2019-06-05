@@ -44,36 +44,79 @@ namespace AdventureGame
 
         public static void Mars(Planet[] planets, Player p, Ship s)
         {
+            bool Searched = false;
+            bool key = false;
+            bool searchedHouse = false;
+            while (p.inShip == false)
+            {
+                Console.WriteLine($"You arrive on Mars, you see a building in the distance\n");
 
+                Console.WriteLine($"What do you do?\n");
 
-            Console.WriteLine($"You arrive on Mars, you see a building in the distance");
-
-            Console.WriteLine($"What do you do?");
-
-            Console.WriteLine("Walk to".PadRight(7) + "- To walk to the building");
-            Console.WriteLine("Enter".PadRight(7) + "- To enter ship");
-            Console.WriteLine("Look".PadRight(7)+ "- To look around");
-            string input = Console.ReadLine().ToLower();
+                Console.WriteLine("Walk to".PadRight(7) + "- To walk to the building\n");
+                Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+                Console.WriteLine("Look".PadRight(7) + "- To look around\n");
+                string input = Console.ReadLine().ToLower();
                 if (input == "walk to")
                 {
-                    Console.WriteLine($"You walk to the building and discover a locked door,");
-                    Console.WriteLine($"What do you do?");
-                    Console.WriteLine("Walk way".PadRight(7) + "- To walk back to the ship");
-                    Console.WriteLine("Look".PadRight(7) + "- To look around");
-                    string input2 = Console.ReadLine().ToLower();
-                    
+                    Console.WriteLine($"You walk to the building\n");
+                    while (p.inShip == false)
+                    {
+                        Console.WriteLine($"What do you do?\n");
+                        Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
+                        Console.WriteLine("Search".PadRight(7) + "- To search around the house\n");
+                        Console.WriteLine("Open".PadRight(7) + "-To open the door\n");
+                        string input2 = Console.ReadLine().ToLower();
+
+                        if (input2 == "search")
+                        {
+                            Console.WriteLine("You search around the house and find a key.\n");
+                            searchedHouse = true;
+
+                        }
+                        else if (input2 == "search" && searchedHouse != true)
+                        {
+                            Console.WriteLine("You have already searched around and found they key.\n");
+                        }
+
+                        else if (input2 == "open" && key != true)
+                        {
+                            Console.WriteLine($"The door is locked.\n");
+                        }
+                        else if (input2 == "open" && key == true)
+                        {
+                            Console.WriteLine($"You use the key to open the door.\n");
+                            while (p.inShip == false)
+                            {
+
+                                Console.WriteLine($"What do you do?\n");
+                                Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
+                                Console.WriteLine($"Enter".PadRight(7) + "- To enter the house\n");
+
+                            }
+                        }
+                    }
+                }
+                else if (input == "look" && Searched != true)
+                {
+                    Console.WriteLine($"You have already looked around, you stay at the ship.\n");
                 }
                 else if (input == "look")
                 {
                     Console.WriteLine($"While looking around the ship you find some ship fuel\n");
                     s.fuel = s.fuel + 50;
                     Console.WriteLine($"50 Fuel added, total {s.fuel}");
+                    Console.WriteLine($"You return to the ship.\n");
+                    Searched = true;
+
                 }
+
                 else if (input == "enter")
                 {
                     p.inShip = true;
                     Console.WriteLine("You entered the ship");
                 }
+            }
 
         }
 
