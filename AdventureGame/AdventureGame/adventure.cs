@@ -30,54 +30,72 @@ namespace AdventureGame
         }
         public static void Venus(Planet[] planets)
         {
-            planets[2].environmnet = "something";
-            planets[2].name = "Venus";
-            planets[2].fuelDistance = 100;
+
         }
         public static void Mercury(Planet[] planets)
         {
-            planets[1].name = "Mercury";
-            planets[1].fuelDistance = 150;
+
 
         }
         public static void Earth(Planet[] planets)
         {
-            planets[3].name = "Earth";
-            planets[3].fuelDistance = 200;
+
         }
 
-        public static void Mars(Planet[] planets)
+        public static void Mars(Planet[] planets, Player p, Ship s)
         {
-            planets[4].environmnet = "something";
-            planets[4].name = "Mars";
-            planets[4].fuelDistance = 250;
+
+
+            Console.WriteLine($"You arrive on Mars, you see a building in the distance");
+
+            Console.WriteLine($"What do you do?");
+
+            Console.WriteLine("Walk to".PadRight(7) + "- To walk to the building");
+            Console.WriteLine("Enter".PadRight(7) + "- To enter ship");
+            Console.WriteLine("Look".PadRight(7)+ "- To look around");
+            string input = Console.ReadLine().ToLower();
+                if (input == "walk to")
+                {
+                    Console.WriteLine($"You walk to the building and discover a locked door,");
+                    Console.WriteLine($"What do you do?");
+                    Console.WriteLine("Walk way".PadRight(7) + "- To walk back to the ship");
+                    Console.WriteLine("Look".PadRight(7) + "- To look around");
+                    string input2 = Console.ReadLine().ToLower();
+                    
+                }
+                else if (input == "look")
+                {
+                    Console.WriteLine($"While looking around the ship you find some ship fuel\n");
+                    s.fuel = s.fuel + 50;
+                    Console.WriteLine($"50 Fuel added, total {s.fuel}");
+                }
+                else if (input == "enter")
+                {
+                    p.inShip = true;
+                    Console.WriteLine("You entered the ship");
+                }
+
         }
 
         public static void Jupiter(Planet[] planets)
         {
-            planets[5].environmnet = "something";
-            planets[5].name = "Jupiter";
-            planets[5].fuelDistance = 300;
+
         }
 
         public static void Saturn(Planet[] planets)
         {
-            planets[6].environmnet = "something";
-            planets[6].name = "Saturn";
-            planets[6].fuelDistance = 350;
+
         }
         public static void Uranus(Planet[] planets)
         {
             planets[7].environmnet = "something";
             planets[7].name = "Uranus";
-            planets[7].fuelDistance = 400;
+            planets[7].fuelDistance = 50;
         }
 
         public static void Neptune(Planet[] planets)
         {
-            planets[8].environmnet = "something";
-            planets[8].name = "Neptune";
-            planets[8].fuelDistance = 450;
+
         }
 
 
@@ -90,11 +108,32 @@ namespace AdventureGame
         {
             p.inShip = true;
         }
-        public static void GameInitialization(ref Player p, ref Ship s)
+        public static void GameInitialization(ref Player p, ref Ship s,Planet[] planets)
         {
             shipSetup(ref s);
             playerSetup(ref p);
-
+            planets[1].name = "Mercury";
+            planets[1].fuelDistance = 50;
+            planets[2].environmnet = "something";
+            planets[2].name = "Venus";
+            planets[2].fuelDistance = 50;
+            planets[3].name = "Earth";
+            planets[3].fuelDistance = 50;
+            planets[4].environmnet = "something";
+            planets[4].name = "Mars";
+            planets[4].fuelDistance = 50;
+            planets[5].environmnet = "something";
+            planets[5].name = "Jupiter";
+            planets[5].fuelDistance = 50;
+            planets[6].environmnet = "something";
+            planets[6].name = "Saturn";
+            planets[6].fuelDistance = 50;
+            planets[7].environmnet = "something";
+            planets[7].name = "Uranus";
+            planets[7].fuelDistance = 50;
+            planets[8].environmnet = "something";
+            planets[8].name = "Neptune";
+            planets[8].fuelDistance = 50;
         }
 
 
@@ -117,7 +156,7 @@ namespace AdventureGame
 
         }
 
-        public static void MainMenu()
+        public static void MainMenu(Ship s)
         {
             Console.WriteLine("Please select a menu option");
             Console.WriteLine("1        Set Difficulty");
@@ -130,12 +169,12 @@ namespace AdventureGame
             switch (menuOption)
             {
                 case 1:
-                    SetDifficulty();
+                    SetDifficulty(s);
                     break;
 
             }
         }
-        public static void SetDifficulty()
+        public static void SetDifficulty(Ship s)
         {
             Console.WriteLine("Please select a difficulty: ");
             Console.WriteLine("1        Easy");
@@ -143,7 +182,6 @@ namespace AdventureGame
             Console.WriteLine("3        Hard");
             string temp = Console.ReadLine();
             int Difficulty = Convert.ToInt32(temp);
-            Ship[] shipStats = new Ship[1];
             int count = 0;
             if (Difficulty > 3)
             {
@@ -155,23 +193,23 @@ namespace AdventureGame
             switch (Difficulty)
             {
                 case 1:
-                    shipStats[count].health = 150;
-                    shipStats[count].fuel = 150;
+                    s.health = 150;
+                    s.fuel = 150;
                     break;
                 case 2:
-                    shipStats[count].health = 100;
-                    shipStats[count].fuel = 100;
+                    s.health = 100;
+                    s.fuel = 100;
                     break;
 
                 case 3:
-                    shipStats[0].health = 50;
-                    shipStats[0].fuel = 50;
+                    s.health = 50;
+                    s.fuel = 50;
                     break;
             }
             Console.Clear();
 
-            Console.WriteLine($"The ships starting health is: {shipStats[0].health}");
-            Console.WriteLine($"The ships starting fuel is: {shipStats[0].fuel}");
+            Console.WriteLine($"The ships starting health is: {s.health}");
+            Console.WriteLine($"The ships starting fuel is: {s.fuel}");
             Console.ReadLine();
         }
         public static void flyEvent(Ship s)
@@ -287,6 +325,47 @@ namespace AdventureGame
             {
                 if (p.inShip)
                 {
+                    flyEvent(s);
+                    switch (input)
+                    {
+                        case "mercury":
+                            s.location = "mercury";
+                            Console.WriteLine("You successfully arrived to mecury.\n");
+                            break;
+                        case "venus":
+                            s.location = "venus";
+                            Console.WriteLine("You successfully arrived to venus.\n");
+                            break;
+                        case "earth":
+                            s.location = "earth";
+                            Console.WriteLine("You successfully arrived to earth.\n");
+                            break;
+                        case "mars":
+                            
+                            s.location = "mars";
+                            Console.WriteLine("You successfully arrived to mars.\n");
+                            
+                            break;
+                        case "jupiter":
+                            s.location = "jupiter";
+                            Console.WriteLine("You successfully arrived to jupiter.\n");
+                            break;
+                        case "uranus":
+                            s.location = "uranus";
+                            Console.WriteLine("You successfully arrived to uranus.\n");
+                            break;
+                        case "neptune":
+                            s.location = "neptune";
+                            Console.WriteLine("You successfully arrived to neptune.\n");
+                            break;
+                        default:
+                            Console.Write("Invaild planet");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You are not in a ship");
                     fuel(s, input, planets, ref enoughFuel);
                     if (enoughFuel)
                     {
@@ -355,9 +434,9 @@ namespace AdventureGame
             Planet[] planets = new Planet[8];
             Ship s = new Ship();
             Player p = new Player();
-            GameInitialization(ref p, ref s);
+            GameInitialization(ref p, ref s, planets);
             StartUp();
-            MainMenu();
+            MainMenu(s);
             while (true)
             {
                 cmdList();
@@ -369,7 +448,7 @@ namespace AdventureGame
                     
                     Console.WriteLine("Enter planet to fly to: ");
                     input = Console.ReadLine().ToLower();
-                    travel(ref s,p, input,planets);
+                    travel(ref s,p, input, planets);
 
                 }
                 else if (input == "exit")
