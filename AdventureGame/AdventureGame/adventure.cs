@@ -193,7 +193,7 @@ namespace AdventureGame
             {
                 case 1:
                     s.health = 150;
-                    s.fuel = 150;
+                    s.fuel = 100;
                     break;
                 case 2:
                     s.health = 100;
@@ -304,18 +304,26 @@ namespace AdventureGame
                     break;
             }
             fuelUsage = fuelDesination - fuelCurrentLocation;
+            
             if(fuelUsage < 0)
             {
+             
                 fuelUsage = fuelUsage * -1;
+                
+               
             }
             if(s.fuel < fuelUsage)
             {
                 enoughFuel = false;
             }
-            else if(s.fuel < fuelUsage)
+            if (fuelUsage <= s.fuel)
             {
+                Console.WriteLine($"{s.fuel} = {s.fuel} - {fuelUsage}");
                 s.fuel = s.fuel - fuelUsage;
+                Console.Write(s.fuel + "\n");
             }
+            Console.Write(s.fuel + "\n");
+        
         }
         public static void travel(ref Ship s,Player p, string input, Planet[] planets)
         {
@@ -324,6 +332,7 @@ namespace AdventureGame
             {
                 if (p.inShip)
                 {
+                    fuel(s, input, planets, ref enoughFuel);
                     if (enoughFuel)
                     {
                         flyEvent(s);
@@ -389,7 +398,7 @@ namespace AdventureGame
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
-            Planet[] planets = new Planet[8];
+            Planet[] planets = new Planet[9];
             Ship s = new Ship();
             Player p = new Player();
             GameInitialization(ref p, ref s, planets);
