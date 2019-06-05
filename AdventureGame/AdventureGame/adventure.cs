@@ -88,9 +88,7 @@ namespace AdventureGame
         }
         public static void Uranus(Planet[] planets)
         {
-            planets[7].environmnet = "something";
-            planets[7].name = "Uranus";
-            planets[7].fuelDistance = 50;
+            
         }
 
         public static void Neptune(Planet[] planets)
@@ -113,27 +111,28 @@ namespace AdventureGame
             shipSetup(ref s);
             playerSetup(ref p);
             planets[1].name = "Mercury";
-            planets[1].fuelDistance = 50;
+            planets[1].fuelDistance = 100;
             planets[2].environmnet = "something";
             planets[2].name = "Venus";
-            planets[2].fuelDistance = 50;
+            planets[2].fuelDistance = 150;
             planets[3].name = "Earth";
-            planets[3].fuelDistance = 50;
+            planets[3].fuelDistance = 200;
             planets[4].environmnet = "something";
             planets[4].name = "Mars";
-            planets[4].fuelDistance = 50;
+            planets[4].fuelDistance = 250;
             planets[5].environmnet = "something";
             planets[5].name = "Jupiter";
-            planets[5].fuelDistance = 50;
+            planets[5].fuelDistance = 300;
             planets[6].environmnet = "something";
             planets[6].name = "Saturn";
-            planets[6].fuelDistance = 50;
+            planets[6].fuelDistance = 350;
             planets[7].environmnet = "something";
             planets[7].name = "Uranus";
-            planets[7].fuelDistance = 50;
+            planets[7].fuelDistance = 400;
             planets[8].environmnet = "something";
             planets[8].name = "Neptune";
-            planets[8].fuelDistance = 50;
+            planets[8].fuelDistance = 450;
+
         }
 
 
@@ -325,51 +324,8 @@ namespace AdventureGame
             {
                 if (p.inShip)
                 {
-                    flyEvent(s);
-                    switch (input)
-                    {
-                        case "mercury":
-                            s.location = "mercury";
-                            Console.WriteLine("You successfully arrived to mecury.\n");
-                            break;
-                        case "venus":
-                            s.location = "venus";
-                            Console.WriteLine("You successfully arrived to venus.\n");
-                            break;
-                        case "earth":
-                            s.location = "earth";
-                            Console.WriteLine("You successfully arrived to earth.\n");
-                            break;
-                        case "mars":
-                            
-                            s.location = "mars";
-                            Console.WriteLine("You successfully arrived to mars.\n");
-                            
-                            break;
-                        case "jupiter":
-                            s.location = "jupiter";
-                            Console.WriteLine("You successfully arrived to jupiter.\n");
-                            break;
-                        case "uranus":
-                            s.location = "uranus";
-                            Console.WriteLine("You successfully arrived to uranus.\n");
-                            break;
-                        case "neptune":
-                            s.location = "neptune";
-                            Console.WriteLine("You successfully arrived to neptune.\n");
-                            break;
-                        default:
-                            Console.Write("Invaild planet");
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("You are not in a ship");
-                    fuel(s, input, planets, ref enoughFuel);
                     if (enoughFuel)
                     {
-                        Console.Write(s.fuel);
                         flyEvent(s);
                         switch (input)
                         {
@@ -404,17 +360,19 @@ namespace AdventureGame
                             default:
                                 Console.Write("Invaild planet");
                                 break;
-                        } 
+                        }
                     }
                     else
                     {
                         Console.WriteLine("You do not have enough fuel!");
                     }
+
                 }
                 else
                 {
                     Console.WriteLine("You are not in a ship!");
                 }
+            
             }
             else
             {
