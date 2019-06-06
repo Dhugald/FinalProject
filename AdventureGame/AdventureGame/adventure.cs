@@ -53,7 +53,6 @@ namespace AdventureGame
                 Console.WriteLine($"You arrive on Mars, you see a building in the distance\n");
 
                 Console.WriteLine($"What do you do?\n");
-
                 Console.WriteLine("Walk to".PadRight(7) + "- To walk to the building\n");
                 Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
                 Console.WriteLine("Look".PadRight(7) + "- To look around\n");
@@ -219,6 +218,7 @@ namespace AdventureGame
 
         public static void StartUp()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Title = "ASCII Art";
             string title = @"
             
@@ -233,9 +233,10 @@ namespace AdventureGame
             Console.WriteLine(title);
             Thread.Sleep(2000);
             Console.Clear();
-
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
+        /**
         public static void MainMenu(Ship s)
         {
             Console.WriteLine("Please select a menu option");
@@ -254,12 +255,19 @@ namespace AdventureGame
 
             }
         }
+
+    **/
         public static void SetDifficulty(Ship s)
         {
             Console.WriteLine("Please select a difficulty: ");
-            Console.WriteLine("1        Easy");
-            Console.WriteLine("2        Regular");
-            Console.WriteLine("3        Hard");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("1".PadRight(7) + "Easy");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("2".PadRight(7) + "Regular");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("3".PadRight(7) + "Hard");
+            Console.ForegroundColor = ConsoleColor.White;
+
             string temp = Console.ReadLine();
             int Difficulty = Convert.ToInt32(temp);
             int count = 0;
@@ -391,10 +399,7 @@ namespace AdventureGame
             if(fuelUsage < 0)
             {
              
-                fuelUsage = fuelUsage * -1;
-              
-                
-               
+                fuelUsage = fuelUsage * -1;              
             }
             if(s.fuel < fuelUsage)
             {
@@ -409,8 +414,6 @@ namespace AdventureGame
                 s.fuel = s.fuel - fuelUsage;
               
             }
-            
-
         }
         public static void travel(ref Ship s,Player p, string input, Planet[] planets)
         {
@@ -435,11 +438,12 @@ namespace AdventureGame
                                 break;
                             case "earth":
                                 s.location = "earth";
-                                Console.WriteLine("You successfully arrived to earth.\n");
+                                Console.WriteLine("You successfully arrived to earth.\n"); 
                                 break;
                             case "mars":
                                 s.location = "mars";
                                 Console.WriteLine("You successfully arrived to mars.\n");
+                                Mars(planets, p, s);
                                 break;
                             case "jupiter":
                                 s.location = "jupiter";
@@ -480,7 +484,37 @@ namespace AdventureGame
         {
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
             Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
-            Console.WriteLine("Enter".PadRight(7) + "- To enter ship");
+            Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+        }
+        public static void questCaller(Planet[] planets, Ship s, Player p)
+        {
+            if (!p.inShip)
+            {
+                switch (s.location)
+                {
+                    case "mercury":
+                        Mercury(planets);
+                        break;
+                    case "venus":
+                        break;
+                    case "earth":
+                        break;
+                    case "mars":
+                        Mars(planets, p, s);
+                        break;
+                    case "jupiter":
+                        break;
+                    case "saturn":
+                        break;
+                    case "uranus":
+                        break;
+                    case "neptune":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        
         }
         static void Main(string[] args)
         {
@@ -490,11 +524,12 @@ namespace AdventureGame
             Player p = new Player();
             GameInitialization(ref p, ref s, planets);
             StartUp();
-            MainMenu(s);
+            SetDifficulty(s);
             while (true)
             {
+                questCaller(planets, s, p);
                 cmdList();
-
+                
                 string input = Console.ReadLine().ToLower();
 
                 if (input == "fly")
@@ -515,6 +550,8 @@ namespace AdventureGame
                     p.inShip = true;
                     Console.WriteLine("You exited the ship");
                 }
+
+                
             }
         }
     }
