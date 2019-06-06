@@ -159,8 +159,8 @@ namespace AdventureGame
 
         public static void Jupiter(Planet[] planets, Ship s, Player p)
         {
-            bool Searched = false;
-            bool key = false;
+            bool caveSearched = false;
+            bool hasKey = false;
             bool looked = false;
             bool inCaves = false;
             bool atCaves = false;
@@ -193,9 +193,35 @@ namespace AdventureGame
                             Console.WriteLine("The caves is dark but you can still see \n");
                             inCaves = true;
                             while (inCaves)
-                            {
+                            { 
                                 Console.WriteLine("Search".PadRight(7) + "- To search the cave\n");
                                 Console.WriteLine("Exit".PadRight(7) + "- To go back to the ship \n");
+                                input = Console.ReadLine().ToLower();
+                                if (input == "search" )
+                                {
+                                    if(!caveSearched)
+                                    {
+                                        s.fuel += 10;
+                                        Console.WriteLine($"10 Fuel added, Total: {s.fuel}");
+                                        Console.WriteLine($"You return to the ship.\n");
+                                        caveSearched = true;
+                                        if(!hasKey)
+                                        {
+                                            Console.Write("You found a chest\n");
+                                            Console.Write("It needs a key to open it\n");
+                                        }
+                                        else
+                                        {
+                                            Console.Write("You found a chest\n");
+                                            Console.Write("You can open it with you\n");
+                                        }
+                                        
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }
                                 else if (input == "exit")
                                 {
                                     inCaves = false;
@@ -227,6 +253,7 @@ namespace AdventureGame
                 }
             }
         }
+
         public static void Saturn(Planet[] planets)
         {
 
