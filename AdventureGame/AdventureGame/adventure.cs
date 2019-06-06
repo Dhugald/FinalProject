@@ -50,74 +50,101 @@ namespace AdventureGame
             bool houseSearched = false;
             while (p.inShip == false)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"You arrive on Mars, you see a building in the distance\n");
 
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"What do you do?\n");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Walk to".PadRight(7) + "- To walk to the building\n");
                 Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
                 Console.WriteLine("Look".PadRight(7) + "- To look around\n");
+                Console.ForegroundColor = ConsoleColor.White;
                 string input = Console.ReadLine().ToLower();
                 if (input == "walk to")
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"You walk to the building\n");
                     while (p.inShip == false)
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine($"What do you do?\n");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
                         Console.WriteLine("Search".PadRight(7) + "- To search around the house\n");
                         Console.WriteLine("Open".PadRight(7) + "-To open the door\n");
+                        Console.ForegroundColor = ConsoleColor.White;
                         string input2 = Console.ReadLine().ToLower();
 
                         if (input2 == "search")
                         {
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("You search around the house and find a key.\n");
                             searchedHouse = true;
                             key = true;
+                            Console.ForegroundColor = ConsoleColor.White;
 
                         }
                         else if (input2 == "search" && searchedHouse == true)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You have already searched around and found they key.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
 
                         else if (input2 == "open" && key != true)
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine($"The door is locked.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         else if (input2 == "open" && key == true)
                         {
-                            Console.WriteLine($"You use the key to open the door.\n");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                             Console.WriteLine($"You use the key to open the door.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
                             houseSearched = false;
                             while (houseSearched == false)
                             {
-
+                                Console.ForegroundColor = ConsoleColor.Cyan;
                                 Console.WriteLine($"What do you do?\n");
+                                Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
                                 Console.WriteLine($"Enter".PadRight(7) + "- To enter the house\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 string input3 = Console.ReadLine();
 
                                 if (input3 == "enter")
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine($"You enter the building and find yourself in an empty room\n");
-
+                                    Console.ForegroundColor = ConsoleColor.Cyan;
                                     Console.WriteLine($"What do you do?\n");
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
                                     Console.WriteLine($"Search".PadRight(7) + "- To search the room\n");
                                     Console.WriteLine($"Exit".PadRight(7) + "- To exit the building\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                     string houseInput = Console.ReadLine().ToLower();
+
 
                                     if (houseInput == "search")
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"While searching around the house you find some rocket fuel!\n");
                                         s.fuel = s.fuel + 50;
                                         Console.WriteLine($"Fuel has incresed to {s.fuel}\n");
                                         Console.WriteLine($"Research points increased!\n");
                                         p.researchPoints = p.researchPoints + 10;
+                                        Console.ForegroundColor = ConsoleColor.Cyan;
                                         Console.WriteLine($"You now have {p.researchPoints} research points.\n");
                                         houseSearched = true;
+                                        Console.ForegroundColor = ConsoleColor.White;
                                     }
                                     else if (houseInput == "exit")
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine("You exit the building.\n");
+                                        Console.ForegroundColor = ConsoleColor.White;
 
                                         houseSearched = false;
                                         
@@ -125,8 +152,10 @@ namespace AdventureGame
                                 }
                                 else if (input3 == "walk away")
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine($"You walk back to the ship\n");
                                     houseSearched = true;
+                                    Console.ForegroundColor = ConsoleColor.White;
 
                                 }
 
@@ -136,14 +165,18 @@ namespace AdventureGame
                 }
                 else if (input == "look" && Searched != true)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"You have already looked around, you stay at the ship.\n");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input == "look")
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"While looking around the ship you find some ship fuel\n");
                     s.fuel = s.fuel + 50;
                     Console.WriteLine($"50 Fuel added, total {s.fuel}");
                     Console.WriteLine($"You return to the ship.\n");
+                    Console.ForegroundColor = ConsoleColor.White;
                     Searched = true;
 
                 }
@@ -151,7 +184,9 @@ namespace AdventureGame
                 else if (input == "enter")
                 {
                     p.inShip = true;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You entered the ship");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 
@@ -507,7 +542,7 @@ namespace AdventureGame
         }
         public static void cmdList()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
             Console.WriteLine("Exit".PadRight(7) + "- To exit ship");         
             Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
@@ -561,7 +596,7 @@ namespace AdventureGame
 
                 if (input == "fly")
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write("Enter planet to fly to: ");
                     Console.ForegroundColor = ConsoleColor.White;
                     input = Console.ReadLine().ToLower();
