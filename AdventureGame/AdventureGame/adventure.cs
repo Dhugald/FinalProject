@@ -157,11 +157,76 @@ namespace AdventureGame
 
         }
 
-        public static void Jupiter(Planet[] planets)
+        public static void Jupiter(Planet[] planets, Ship s, Player p)
         {
+            bool Searched = false;
+            bool key = false;
+            bool looked = false;
+            bool inCaves = false;
+            bool atCaves = false;
+            while (!p.inShip)
+            {
+                Console.WriteLine($"You arrive on Jupiter, You don't see much.\n");
 
+                Console.WriteLine($"What do you do?\n");
+                if (looked == true)
+                {
+                    Console.WriteLine("Walk to".PadRight(7) + "- To walk to the rocks\n");
+                }
+                Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+                Console.WriteLine("Look".PadRight(7) + "- To look around\n");
+                string input = Console.ReadLine().ToLower();
+                if (input == "walk to" && looked == true)
+                {
+
+                    Console.WriteLine($"You walk to the rocks\n");
+                    Console.WriteLine($"The rocks appear to be a cave");
+                    atCaves = true;
+                    while (atCaves)
+                    {
+                        Console.WriteLine("Enter".PadRight(7) + "- To enter the cave\n");
+                        Console.WriteLine("Exit".PadRight(7) + "- To go back to the ship \n");
+                        input = Console.ReadLine().ToLower();
+                        if (input == "Enter")
+                        {
+                            Console.WriteLine("You enter the cave \n");
+                            Console.WriteLine("The caves is dark but you can still see \n");
+                            inCaves = true;
+                            while (inCaves)
+                            {
+                                Console.WriteLine("Search".PadRight(7) + "- To search the cave\n");
+                                Console.WriteLine("Exit".PadRight(7) + "- To go back to the ship \n");
+                                else if (input == "exit")
+                                {
+                                    inCaves = false;
+                                    Console.WriteLine("You exit the ship \n");
+                                }
+                            }
+                        }
+                        else if (input == "exit")
+                        {
+                            atCaves = false;
+                            Console.WriteLine("You go back to the ship \n");
+                        }
+                    }
+                }
+                else if (input == "look" && looked == false)
+                {
+                    looked = true;
+                    Console.WriteLine($"While looking around the ship you find some ship fuel\n");
+                    s.fuel += 50;
+                    Console.WriteLine($"50 Fuel added, Total: {s.fuel}");
+                    Console.WriteLine($"You return to the ship.\n");
+
+                    Console.WriteLine("While searching you notice some rocks in the distance");
+                }
+                else if (input == "look" && looked == true)
+                {
+                    Console.WriteLine("You already looked around!");
+                    Console.WriteLine("While looking around before you found fuel and some rocks in the distance");
+                }
+            }
         }
-
         public static void Saturn(Planet[] planets)
         {
 
