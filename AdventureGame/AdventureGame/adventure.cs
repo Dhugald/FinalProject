@@ -377,8 +377,7 @@ namespace AdventureGame
             {
              
                 fuelUsage = fuelUsage * -1;
-              
-                
+   
                
             }
             if(s.fuel < fuelUsage)
@@ -420,11 +419,12 @@ namespace AdventureGame
                                 break;
                             case "earth":
                                 s.location = "earth";
-                                Console.WriteLine("You successfully arrived to earth.\n");
+                                Console.WriteLine("You successfully arrived to earth.\n"); 
                                 break;
                             case "mars":
                                 s.location = "mars";
                                 Console.WriteLine("You successfully arrived to mars.\n");
+                                Mars(planets, p, s);
                                 break;
                             case "jupiter":
                                 s.location = "jupiter";
@@ -467,6 +467,36 @@ namespace AdventureGame
             Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
             Console.WriteLine("Enter".PadRight(7) + "- To enter ship");
         }
+        public static void questCaller(Planet[] planets, Ship s, Player p)
+        {
+            if (!p.inShip)
+            {
+                switch (s.location)
+                {
+                    case "mercury":
+                        Mercury(planets);
+                        break;
+                    case "venus":
+                        break;
+                    case "earth":
+                        break;
+                    case "mars":
+                        Mars(planets, p, s);
+                        break;
+                    case "jupiter":
+                        break;
+                    case "saturn":
+                        break;
+                    case "uranus":
+                        break;
+                    case "neptune":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        
+        }
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
@@ -478,8 +508,9 @@ namespace AdventureGame
             MainMenu(s);
             while (true)
             {
+                questCaller(planets, s, p);
                 cmdList();
-
+                
                 string input = Console.ReadLine().ToLower();
 
                 if (input == "fly")
@@ -500,6 +531,8 @@ namespace AdventureGame
                     p.inShip = true;
                     Console.WriteLine("You exited the ship");
                 }
+
+                
             }
         }
     }
