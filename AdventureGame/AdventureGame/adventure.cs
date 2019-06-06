@@ -61,6 +61,7 @@ namespace AdventureGame
                     Console.WriteLine("Walk way".PadRight(7) + "- To walk back to the ship");
                     Console.WriteLine("Look".PadRight(7) + "- To look around");
                     string input2 = Console.ReadLine().ToLower();
+
                     
                 }
                 else if (input == "look")
@@ -389,7 +390,7 @@ namespace AdventureGame
         static void Main(string[] args)
         {
             string[] inventory = new string[7];
-            Planet[] planets = new Planet[8];
+            Planet[] planets = new Planet[9];
             Ship s = new Ship();
             Player p = new Player();
             GameInitialization(ref p, ref s, planets);
