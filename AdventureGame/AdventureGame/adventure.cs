@@ -190,7 +190,7 @@ namespace AdventureGame
                             {
                                 Console.WriteLine("Search".PadRight(7) + "- To search the cave\n");
                                 Console.WriteLine("Exit".PadRight(7) + "- To go back to the ship \n");
-                                else if (input == "exit")
+                                if (input == "exit")
                                 {
                                     inCaves = false;
                                     Console.WriteLine("You exit the ship \n");
