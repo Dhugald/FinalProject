@@ -287,7 +287,7 @@ namespace AdventureGame
                     break;
             }
         }
-        public static void fuel(Ship s, string destination, Planet[] planets, ref bool enoughFuel)
+        public static void fuel(ref Ship s, string destination, Planet[] planets, ref bool enoughFuel)
         {
             int fuelUsage, fuelDesination = 0, fuelCurrentLocation = 0;
             switch (destination)
@@ -346,36 +346,42 @@ namespace AdventureGame
                     fuelCurrentLocation = planets[8].fuelDistance;
                     break;
             }
+
             fuelUsage = fuelDesination - fuelCurrentLocation;
+           
             
             if(fuelUsage < 0)
             {
              
                 fuelUsage = fuelUsage * -1;
+              
                 
                
             }
             if(s.fuel < fuelUsage)
             {
                 enoughFuel = false;
+                
             }
-            if (fuelUsage <= s.fuel)
+            if (s.fuel >= fuelUsage)
             {
-              
+
+                enoughFuel = true;
+ 
                 s.fuel = s.fuel - fuelUsage;
-                Console.Write(s.fuel + "\n");
+              
             }
-            Console.Write(s.fuel + "\n");
-        
+            
+
         }
         public static void travel(ref Ship s,Player p, string input, Planet[] planets)
         {
-            bool enoughFuel = true;
+            bool enoughFuel = false;
             if (input != s.location)
             {
                 if (p.inShip)
                 {
-                    fuel(s, input, planets, ref enoughFuel);
+                    fuel(ref s, input, planets, ref enoughFuel);
                     if (enoughFuel)
                     {
                         flyEvent(s);
@@ -450,7 +456,7 @@ namespace AdventureGame
             while (true)
             {
                 cmdList();
-                Console.WriteLine(p.inShip);
+
                 string input = Console.ReadLine().ToLower();
 
                 if (input == "fly")
