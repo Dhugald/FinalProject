@@ -376,9 +376,7 @@ namespace AdventureGame
             if(fuelUsage < 0)
             {
              
-                fuelUsage = fuelUsage * -1;
-   
-               
+                fuelUsage = fuelUsage * -1;              
             }
             if(s.fuel < fuelUsage)
             {
@@ -393,8 +391,6 @@ namespace AdventureGame
                 s.fuel = s.fuel - fuelUsage;
               
             }
-            
-
         }
         public static void travel(ref Ship s,Player p, string input, Planet[] planets)
         {
@@ -465,7 +461,7 @@ namespace AdventureGame
         {
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
             Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
-            Console.WriteLine("Enter".PadRight(7) + "- To enter ship");
+            Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
         }
         public static void questCaller(Planet[] planets, Ship s, Player p)
         {
