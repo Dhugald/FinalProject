@@ -47,6 +47,7 @@ namespace AdventureGame
             bool Searched = false;
             bool key = false;
             bool searchedHouse = false;
+            bool houseSearched = false;
             while (p.inShip == false)
             {
                 Console.WriteLine($"You arrive on Mars, you see a building in the distance\n");
@@ -59,7 +60,7 @@ namespace AdventureGame
                 if (input == "walk to")
                 {
                     Console.WriteLine($"You walk to the building\n");
-                    while (p.inShip == false)
+                    while (houseSearched == false)
                     {
                         Console.WriteLine($"What do you do?\n");
                         Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
@@ -71,9 +72,10 @@ namespace AdventureGame
                         {
                             Console.WriteLine("You search around the house and find a key.\n");
                             searchedHouse = true;
+                            key = true;
 
                         }
-                        else if (input2 == "search" && searchedHouse != true)
+                        else if (input2 == "search" && searchedHouse == true)
                         {
                             Console.WriteLine("You have already searched around and found they key.\n");
                         }
@@ -91,6 +93,27 @@ namespace AdventureGame
                                 Console.WriteLine($"What do you do?\n");
                                 Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
                                 Console.WriteLine($"Enter".PadRight(7) + "- To enter the house\n");
+                                string input3 = Console.ReadLine();
+
+                                if (input3 == "enter")
+                                {
+                                    Console.WriteLine($"You enter the building and find yourself in an empty room\n");
+
+                                    Console.WriteLine($"What do you do?\n");
+                                    Console.WriteLine($"Search".PadRight(7) + "- To search the room");
+                                    Console.WriteLine($"Exit".PadRight(7) + "- To exit the building ");
+                                    string houseInput = Console.ReadLine().ToLower();
+
+                                    if (houseInput == "search")
+                                    {
+                                        Console.WriteLine($"While searching around the house you find some rocket fuel!\n");
+                                        s.fuel = s.fuel + 50;
+                                        Console.WriteLine($"Fuel has incresed to {s.fuel}");
+                                        Console.WriteLine($"Research points increased!\n");
+                                        Console.WriteLine();
+                                    }
+                                }
+
 
                             }
                         }
@@ -295,7 +318,7 @@ namespace AdventureGame
                     break;
             }
         }
-        public static void fuel(Ship s, string destination, Planet[] planets, ref bool enoughFuel)
+        public static void fuel(ref Ship s, string destination, Planet[] planets, ref bool enoughFuel)
         {
             int fuelUsage, fuelDesination = 0, fuelCurrentLocation = 0;
             switch (destination)
@@ -354,36 +377,37 @@ namespace AdventureGame
                     fuelCurrentLocation = planets[8].fuelDistance;
                     break;
             }
+
             fuelUsage = fuelDesination - fuelCurrentLocation;
+           
             
             if(fuelUsage < 0)
             {
              
-                fuelUsage = fuelUsage * -1;
-                
-               
+                fuelUsage = fuelUsage * -1;              
             }
             if(s.fuel < fuelUsage)
             {
                 enoughFuel = false;
+                
             }
-            if (fuelUsage <= s.fuel)
+            if (s.fuel >= fuelUsage)
             {
-              
+
+                enoughFuel = true;
+ 
                 s.fuel = s.fuel - fuelUsage;
-                Console.Write(s.fuel + "\n");
+              
             }
-            Console.Write(s.fuel + "\n");
-        
         }
         public static void travel(ref Ship s,Player p, string input, Planet[] planets)
         {
-            bool enoughFuel = true;
+            bool enoughFuel = false;
             if (input != s.location)
             {
                 if (p.inShip)
                 {
-                    fuel(s, input, planets, ref enoughFuel);
+                    fuel(ref s, input, planets, ref enoughFuel);
                     if (enoughFuel)
                     {
                         flyEvent(s);
@@ -399,11 +423,12 @@ namespace AdventureGame
                                 break;
                             case "earth":
                                 s.location = "earth";
-                                Console.WriteLine("You successfully arrived to earth.\n");
+                                Console.WriteLine("You successfully arrived to earth.\n"); 
                                 break;
                             case "mars":
                                 s.location = "mars";
                                 Console.WriteLine("You successfully arrived to mars.\n");
+                                Mars(planets, p, s);
                                 break;
                             case "jupiter":
                                 s.location = "jupiter";
@@ -424,19 +449,19 @@ namespace AdventureGame
                     }
                     else
                     {
-                        Console.WriteLine("You do not have enough fuel!");
+                        Console.WriteLine("You do not have enough fuel!\n");
                     }
 
                 }
                 else
                 {
-                    Console.WriteLine("You are not in a ship!");
+                    Console.WriteLine("You are not in a ship!\n");
                 }
             
             }
             else
             {
-                Console.WriteLine("You are already here!");
+                Console.WriteLine("You are already here!\n");
             }
 
         }
@@ -444,7 +469,37 @@ namespace AdventureGame
         {
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
             Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
-            Console.WriteLine("Enter".PadRight(7) + "- To enter ship");
+            Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+        }
+        public static void questCaller(Planet[] planets, Ship s, Player p)
+        {
+            if (!p.inShip)
+            {
+                switch (s.location)
+                {
+                    case "mercury":
+                        Mercury(planets);
+                        break;
+                    case "venus":
+                        break;
+                    case "earth":
+                        break;
+                    case "mars":
+                        Mars(planets, p, s);
+                        break;
+                    case "jupiter":
+                        break;
+                    case "saturn":
+                        break;
+                    case "uranus":
+                        break;
+                    case "neptune":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        
         }
         static void Main(string[] args)
         {
@@ -457,14 +512,15 @@ namespace AdventureGame
             SetDifficulty(s);
             while (true)
             {
+                questCaller(planets, s, p);
                 cmdList();
-                Console.WriteLine(p.inShip);
+                
                 string input = Console.ReadLine().ToLower();
 
                 if (input == "fly")
                 {
                     
-                    Console.WriteLine("Enter planet to fly to: ");
+                    Console.Write("Enter planet to fly to: ");
                     input = Console.ReadLine().ToLower();
                     travel(ref s,p, input, planets);
 
@@ -479,6 +535,8 @@ namespace AdventureGame
                     p.inShip = true;
                     Console.WriteLine("You exited the ship");
                 }
+
+                
             }
         }
     }
