@@ -306,6 +306,7 @@ namespace AdventureGame
             switch(rand.Next(1,11))
             {
                 case 1:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Encounter space pirates");
                     break;
                 case 2:
@@ -313,6 +314,7 @@ namespace AdventureGame
                 case 3:
                     break;
                 case 4:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Encounter space pirates");
                     break;
                 case 5:
@@ -322,9 +324,11 @@ namespace AdventureGame
                 case 7:
                     break;
                 case 8:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Encounter comets");
                     break;
                 case 9:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Encounter comets");
                     break;
                 case 10:
@@ -332,6 +336,7 @@ namespace AdventureGame
                 default:
                     break;
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public static void fuel(ref Ship s, string destination, Planet[] planets, ref bool enoughFuel)
         {
@@ -425,66 +430,88 @@ namespace AdventureGame
                     fuel(ref s, input, planets, ref enoughFuel);
                     if (enoughFuel)
                     {
-                        flyEvent(s);
+                        
+                           flyEvent(s);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         switch (input)
                         {
                             case "mercury":
                                 s.location = "mercury";
                                 Console.WriteLine("You successfully arrived to mecury.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             case "venus":
                                 s.location = "venus";
                                 Console.WriteLine("You successfully arrived to venus.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             case "earth":
                                 s.location = "earth";
-                                Console.WriteLine("You successfully arrived to earth.\n"); 
+                                Console.WriteLine("You successfully arrived to earth.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             case "mars":
                                 s.location = "mars";
                                 Console.WriteLine("You successfully arrived to mars.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 Mars(planets, p, s);
                                 break;
                             case "jupiter":
                                 s.location = "jupiter";
                                 Console.WriteLine("You successfully arrived to jupiter.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             case "uranus":
                                 s.location = "uranus";
                                 Console.WriteLine("You successfully arrived to uranus.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             case "neptune":
                                 s.location = "neptune";
                                 Console.WriteLine("You successfully arrived to neptune.\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             default:
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.Write("Invaild planet");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 break;
+                              
                         }
+                        
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("You do not have enough fuel!\n");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
+                    
 
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You are not in a ship!\n");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("You are already here!\n");
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
         }
         public static void cmdList()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
-            Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
+            Console.WriteLine("Exit".PadRight(7) + "- To exit ship");         
             Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         public static void questCaller(Planet[] planets, Ship s, Player p)
         {
@@ -534,8 +561,9 @@ namespace AdventureGame
 
                 if (input == "fly")
                 {
-                    
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write("Enter planet to fly to: ");
+                    Console.ForegroundColor = ConsoleColor.White;
                     input = Console.ReadLine().ToLower();
                     travel(ref s,p, input, planets);
 
@@ -543,12 +571,16 @@ namespace AdventureGame
                 else if (input == "exit")
                 {
                     p.inShip = false;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You exited the ship");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else if (input == "enter")
                 {
                     p.inShip = true;
-                    Console.WriteLine("You exited the ship");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("You entered the ship");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 
