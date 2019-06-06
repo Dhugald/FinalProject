@@ -422,19 +422,19 @@ namespace AdventureGame
                     }
                     else
                     {
-                        Console.WriteLine("You do not have enough fuel!");
+                        Console.WriteLine("You do not have enough fuel!\n");
                     }
 
                 }
                 else
                 {
-                    Console.WriteLine("You are not in a ship!");
+                    Console.WriteLine("You are not in a ship!\n");
                 }
             
             }
             else
             {
-                Console.WriteLine("You are already here!");
+                Console.WriteLine("You are already here!\n");
             }
 
         }
@@ -462,7 +462,7 @@ namespace AdventureGame
                 if (input == "fly")
                 {
                     
-                    Console.WriteLine("Enter planet to fly to: ");
+                    Console.Write("Enter planet to fly to: ");
                     input = Console.ReadLine().ToLower();
                     travel(ref s,p, input, planets);
 
