@@ -361,7 +361,7 @@ namespace AdventureGame
             }
             if (fuelUsage <= s.fuel)
             {
-                Console.WriteLine($"{s.fuel} = {s.fuel} - {fuelUsage}");
+              
                 s.fuel = s.fuel - fuelUsage;
                 Console.Write(s.fuel + "\n");
             }
