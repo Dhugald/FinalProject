@@ -47,7 +47,7 @@ namespace AdventureGame
             bool Searched = false;
             bool key = false;
             bool searchedHouse = false;
-            bool houseSearched = false;
+            bool buildingOption = false;
             while (p.inShip == false)
             {
                 Console.WriteLine($"You arrive on Mars, you see a building in the distance\n");
@@ -60,7 +60,7 @@ namespace AdventureGame
                 if (input == "walk to")
                 {
                     Console.WriteLine($"You walk to the building\n");
-                    while (p.inShip == false)
+                    while (buildingOption == false)
                     {
                         Console.WriteLine($"What do you do?\n");
                         Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
@@ -87,9 +87,6 @@ namespace AdventureGame
                         else if (input2 == "open" && key == true)
                         {
                             Console.WriteLine($"You use the key to open the door.\n");
-                            houseSearched = false;
-                            while (houseSearched == false)
-                            {
 
                                 Console.WriteLine($"What do you do?\n");
                                 Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
@@ -98,15 +95,7 @@ namespace AdventureGame
 
                                 if (input3 == "enter")
                                 {
-                                    Console.WriteLine($"You enter the building and find yourself in an empty room\n");
-
-                                    Console.WriteLine($"What do you do?\n");
-                                    Console.WriteLine($"Search".PadRight(7) + "- To search the room\n");
-                                    Console.WriteLine($"Exit".PadRight(7) + "- To exit the building\n");
-                                    string houseInput = Console.ReadLine().ToLower();
-
-                                    if (houseInput == "search")
-                                    {
+                                Console.WriteLine($"You enter the house and start searching around.\n");
                                         Console.WriteLine($"While searching around the house you find some rocket fuel!\n");
                                         s.fuel = s.fuel + 50;
                                         Console.WriteLine($"Fuel has incresed to {s.fuel}\n");
@@ -114,23 +103,19 @@ namespace AdventureGame
                                         p.researchPoints = p.researchPoints + 10;
                                         Console.WriteLine($"You now have {p.researchPoints} research points.\n");
                                         houseSearched = true;
-                                    }
-                                    else if (houseInput == "exit")
-                                    {
-                                        Console.WriteLine("You exit the building.\n");
-
-                                        houseSearched = false;
-                                        
-                                    }
+                                    
                                 }
                                 else if (input3 == "walk away")
                                 {
                                     Console.WriteLine($"You walk back to the ship\n");
-                                    houseSearched = true;
-
+                                buildingOption = true;
                                 }
 
-                            }
+                        }
+                        else if (input2 == "walk away")
+                        {
+                            Console.WriteLine($"You walk back to the ship\n");
+                            buildingOption = true;
                         }
                     }
                 }
