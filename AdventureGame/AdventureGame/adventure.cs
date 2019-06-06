@@ -47,6 +47,7 @@ namespace AdventureGame
             bool Searched = false;
             bool key = false;
             bool searchedHouse = false;
+            bool houseSearched = false;
             while (p.inShip == false)
             {
                 Console.WriteLine($"You arrive on Mars, you see a building in the distance\n");
@@ -60,7 +61,7 @@ namespace AdventureGame
                 if (input == "walk to")
                 {
                     Console.WriteLine($"You walk to the building\n");
-                    while (p.inShip == false)
+                    while (houseSearched == false)
                     {
                         Console.WriteLine($"What do you do?\n");
                         Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
@@ -72,9 +73,10 @@ namespace AdventureGame
                         {
                             Console.WriteLine("You search around the house and find a key.\n");
                             searchedHouse = true;
+                            key = true;
 
                         }
-                        else if (input2 == "search" && searchedHouse != true)
+                        else if (input2 == "search" && searchedHouse == true)
                         {
                             Console.WriteLine("You have already searched around and found they key.\n");
                         }
@@ -92,6 +94,27 @@ namespace AdventureGame
                                 Console.WriteLine($"What do you do?\n");
                                 Console.WriteLine("Walk away".PadRight(7) + "- To walk back to the ship\n");
                                 Console.WriteLine($"Enter".PadRight(7) + "- To enter the house\n");
+                                string input3 = Console.ReadLine();
+
+                                if (input3 == "enter")
+                                {
+                                    Console.WriteLine($"You enter the building and find yourself in an empty room\n");
+
+                                    Console.WriteLine($"What do you do?\n");
+                                    Console.WriteLine($"Search".PadRight(7) + "- To search the room");
+                                    Console.WriteLine($"Exit".PadRight(7) + "- To exit the building ");
+                                    string houseInput = Console.ReadLine().ToLower();
+
+                                    if (houseInput == "search")
+                                    {
+                                        Console.WriteLine($"While searching around the house you find some rocket fuel!\n");
+                                        s.fuel = s.fuel + 50;
+                                        Console.WriteLine($"Fuel has incresed to {s.fuel}");
+                                        Console.WriteLine($"Research points increased!\n");
+                                        Console.WriteLine();
+                                    }
+                                }
+
 
                             }
                         }
