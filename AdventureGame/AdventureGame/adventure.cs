@@ -326,7 +326,7 @@ namespace AdventureGame
         public static void StartUp()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Title = "ASCII Art";
+            Console.Title = "Planet Hop";
             string title = @"
             
   ____  _                  _        _   _                       ___________
@@ -335,13 +335,26 @@ namespace AdventureGame
  |  __/| | (_| | | | |  __/ |_     |  _  | (_) | |_) |       |  @@@@     @@  |         \___\    ==|=========|==
  |_|   |_|\__,_|_| |_|\___|\__|    |_| |_|\___/| .__/         \   @@@       /              /       \_______/
                                                |_|             \__@@_____@@/
-
+                                                                                                    
                     ";
-            Console.WriteLine(title);
+            String loading = "";
+            for (int i = 0; i <15; i++)
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkBlue+i;
+                Console.WriteLine(title);
+                loading += ". ";
+                Console.WriteLine("Loading".PadLeft(60));
+                Console.WriteLine();
+                Console.WriteLine("".PadRight(42) + loading);
+                Thread.Sleep(900);
+            }
             Thread.Sleep(2000);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
-        }
+            
+            
+           }
 
         /**
         public static void MainMenu(Ship s)
@@ -380,7 +393,9 @@ namespace AdventureGame
             int count = 0;
             if (Difficulty > 3)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Please enter a vaild option menu");
+                Console.ForegroundColor = ConsoleColor.White;
                 temp = Console.ReadLine();
                 Difficulty = Convert.ToInt32(temp);
             }
