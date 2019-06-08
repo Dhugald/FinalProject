@@ -3,10 +3,17 @@ using System.Threading;
 
 namespace AdventureGame
 {
-    class adventure
+    class Adventure
     {
+
+        public static double oxygenMins;
+        public static double speed;
+        public static double metresMin;
+
         public struct Player
         {
+            public int health;
+            public int speed;
             public int researchPoints;
             public bool inShip;
         }
@@ -21,8 +28,9 @@ namespace AdventureGame
             public string name;
             public string environmnet;
             public int fuelDistance;
-            public bool task;
+            public bool task; 
         }
+        /**
         public static void Venus(Planet[] planets)
         {
 
@@ -282,21 +290,23 @@ namespace AdventureGame
         {
 
         }
+            **/
 
 
-        public static void shipSetup(ref Ship s)
+        public static void ShipSetup(ref Ship s)
         {
             s.location = "earth";
             s.fuel = 100;
         }
-        public static void playerSetup(ref Player p)
+        public static void PlayerSetup(ref Player p)
         {
             p.inShip = true;
+           
         }
         public static void GameInitialization(ref Player p, ref Ship s,Planet[] planets)
         {
-            shipSetup(ref s);
-            playerSetup(ref p);
+            ShipSetup(ref s);
+            PlayerSetup(ref p);
             planets[1].name = "Mercury";
             planets[1].fuelDistance = 100;
             planets[2].environmnet = "something";
@@ -347,7 +357,7 @@ namespace AdventureGame
                 Console.WriteLine("Loading".PadLeft(60));
                 Console.WriteLine();
                 Console.WriteLine("".PadRight(42) + loading);
-                Thread.Sleep(900);
+                Thread.Sleep(700);
             }
             Thread.Sleep(2000);
             Console.Clear();
@@ -390,7 +400,7 @@ namespace AdventureGame
 
             string temp = Console.ReadLine();
             int Difficulty = Convert.ToInt32(temp);
-            int count = 0;
+            //int count = 0;
             if (Difficulty > 3)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -422,7 +432,7 @@ namespace AdventureGame
             Console.WriteLine($"The ships starting fuel is: {s.fuel}");
             Console.ReadLine();
         }
-        public static void flyEvent(Ship s)
+        public static void FlyEvent(Ship s)
         {
             Random rand = new Random();
             switch(rand.Next(1,11))
@@ -460,7 +470,7 @@ namespace AdventureGame
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public static void fuel(ref Ship s, string destination, Planet[] planets, ref bool enoughFuel)
+        public static void Fuel(ref Ship s, string destination, Planet[] planets, ref bool enoughFuel)
         {
             int fuelUsage, fuelDesination = 0, fuelCurrentLocation = 0;
             switch (destination)
@@ -542,18 +552,18 @@ namespace AdventureGame
               
             }
         }
-        public static void travel(ref Ship s,Player p, string input, Planet[] planets)
+        public static void Travel(ref Ship s,Player p, string input, Planet[] planets)
         {
             bool enoughFuel = false;
             if (input != s.location)
             {
                 if (p.inShip)
                 {
-                    fuel(ref s, input, planets, ref enoughFuel);
+                    Fuel(ref s, input, planets, ref enoughFuel);
                     if (enoughFuel)
                     {
                         
-                           flyEvent(s);
+                           FlyEvent(s);
                         Console.ForegroundColor = ConsoleColor.Green;
                         switch (input)
                         {
@@ -561,37 +571,45 @@ namespace AdventureGame
                                 s.location = "mercury";
                                 Console.WriteLine("You successfully arrived to mecury.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("The weather is currently " + Weather(s.location) +" on "+ (s.location));
                                 break;
                             case "venus":
                                 s.location = "venus";
                                 Console.WriteLine("You successfully arrived to venus.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
                                 break;
                             case "earth":
                                 s.location = "earth";
                                 Console.WriteLine("You successfully arrived to earth.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
                                 break;
                             case "mars":
                                 s.location = "mars";
                                 Console.WriteLine("You successfully arrived to mars.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
-                                Mars(planets, p, s);
+                                Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
+                                //Mars(planets, p, s);
                                 break;
                             case "jupiter":
                                 s.location = "jupiter";
                                 Console.WriteLine("You successfully arrived to jupiter.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
                                 break;
                             case "uranus":
                                 s.location = "uranus";
                                 Console.WriteLine("You successfully arrived to uranus.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
                                 break;
                             case "neptune":
                                 s.location = "neptune";
                                 Console.WriteLine("You successfully arrived to neptune.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
+
                                 break;
                             default:
                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -627,7 +645,7 @@ namespace AdventureGame
             }
 
         }
-        public static void cmdList()
+        public static void CmdList()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
@@ -635,21 +653,21 @@ namespace AdventureGame
             Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public static void questCaller(Planet[] planets, Ship s, Player p)
+        public static void QuestCaller(Planet[] planets, Ship s, Player p)
         {
             if (!p.inShip)
             {
                 switch (s.location)
                 {
                     case "mercury":
-                        Mercury(planets);
+                        //Mercury(planets);
                         break;
                     case "venus":
                         break;
                     case "earth":
                         break;
                     case "mars":
-                        Mars(planets, p, s);
+                        //Mars(planets, p, s);
                         break;
                     case "jupiter":
                         break;
@@ -665,19 +683,458 @@ namespace AdventureGame
             }
         
         }
+
+        public static string Weather(String planetName)
+        {
+            
+            Random rnd = new Random();
+            int caseSwitch;
+            string weather = "clear";
+        
+        if (planetName.ToLower() == "mercury")
+            {
+                caseSwitch = rnd.Next(1, 3);
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "windy";
+                        break;
+                    case 3:
+                        weather = "tornado";
+                        break;
+                }                
+            }
+
+        if (planetName.ToLower() == "venus")
+            {
+                caseSwitch = rnd.Next(1, 3);
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "acid rain";
+                        break;
+                    case 3:
+                        weather = "heatwave";
+                        break;   
+                }
+            }
+            if (planetName.ToLower() == "jupiter")
+            {
+                caseSwitch = rnd.Next(1, 5);
+
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "hurricane";
+                        break;
+                    case 3:
+                        weather = "tornado";
+                        break;
+                    case 4:
+                        weather = "windy";
+                        break;
+                    case 5:
+                        weather = "rain";
+                        break;
+                }
+
+            }
+
+           if (planetName.ToLower() == "mars")
+            {
+                caseSwitch = rnd.Next(1, 2);
+
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "windy";
+                        break;
+                }
+            }
+            if (planetName.ToLower() == "earth")
+            {
+                caseSwitch = rnd.Next(1, 10);
+
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "raining";
+                        break;
+                    case 3:
+                        weather = "thunderstorm";
+                        break;
+                    case 4:
+                        weather = "sandstorm";
+                        break;
+                    case 5:
+                        weather = "snowing";
+                        break;
+                    case 6:
+                        weather = "snowstorm";
+                        break;
+                    case 7:
+                        weather = "sunny";
+                        break;
+                    case 8:
+                        weather = "heatwave";
+                        break;
+                    case 9:
+                        weather = "windy";
+                        break;
+                    case 10:
+                        weather = "tornado";
+                        break;
+                }
+            }
+
+
+            if (planetName.ToLower() == "saturn")
+            {
+                caseSwitch = rnd.Next(1, 4);
+
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "cloudy";
+                        break;
+                    case 3:
+                        weather = "windy";
+                        break;
+                    case 4:
+                        weather = "tornado";
+                        break;
+
+                }
+            }
+
+            if (planetName.ToLower() == "neptune")
+            {
+                caseSwitch = rnd.Next(1, 4);
+
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "cloudy";
+                        break;
+                    case 3:
+                        weather = "windy";
+                        break;
+                    case 4:
+                        weather = "tornado";
+                        break;
+                }
+            }
+
+            if (planetName.ToLower() == "uranus")
+            {
+                caseSwitch = rnd.Next(1, 6);
+
+                switch (caseSwitch)
+                {
+                    case 1:
+                        weather = "clear";
+                        break;
+                    case 2:
+                        weather = "cloudy";
+                        break;
+                    case 3:
+                        weather = "windy";
+                        break;
+                    case 4:
+                        weather = "tornado";
+                        break;
+                    case 5:
+                        weather = "snowy";
+                        break;
+                    case 6:
+                        weather = "snowstorm";
+                        break;
+                }
+            }
+            return weather;
+        }
+        /**
+        public static double Oxygen()
+        {
+            int health = p.health;
+            //5kmph / speed rate eg 5/75%
+            double speed = 5 * (p.speed / 100);
+            double metresMin = (speed * 1000) / 60;
+            //full health= 7hrs oxygen aka 420 mins
+            double oxygenMins = health * 4.2;
+            return oxygenMins;
+        }**/
+        public static void Landscape(Ship s, Player p)
+        {
+                        
+                Console.WriteLine("You left the ship.\n");
+                Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins + " Planet: " + s.location + "    Weather: " + Weather(s.location));
+                
+
+                if (s.location.ToLower() != "earth")
+                {
+                    if (Weather(s.location) == "acid rain")
+                    {
+                        GameOver();
+                    }
+                    else if (Weather(s.location) == "clear" || Weather(s.location) == "sunny" || Weather(s.location) == "cloudy")
+                    {
+                        p.speed = p.health;
+                    }
+                    else if (Weather(s.location) == "windy" || Weather(s.location) == "heatwave" ||
+                        Weather(s.location) == "rain" || Weather(s.location) == "snowing")
+                    {
+                        //speed reduced by 25%
+                        p.speed = ((p.health / 4) * 3);
+
+                    }
+                    else if (Weather(s.location) == "tornado" || Weather(s.location) == "hurricane" || Weather(s.location) == "thunderstorm"
+                        || Weather(s.location) == "sandstorm" || Weather(s.location) == "snowstorm")
+                    {
+                        //speed reduced by 50%
+                        p.speed = (p.health / 2);
+                    }
+                }
+                /** 100% health = 7hrs oxygen
+                 * 100% speed= 5km/hr
+                 * 75% speed=3.75km hr
+                 * 50% speed=2.5km hr
+                 * max 35km **/
+                Random rnd = new Random();
+                int landscapeDistance = rnd.Next(1, 1000);
+
+                string landscape = "";
+
+                int landscapeSwitch;
+                landscapeSwitch = rnd.Next(1, 8);
+
+                switch (landscapeSwitch)
+                {
+                    case 1:
+                        landscape = "building";
+                        break;
+                    case 2:
+                        landscape = "forrest";
+                        break;
+                    case 3:
+                        landscape = "cave";
+                        break;
+                    case 4:
+                        landscape = "mountain";
+                        break;
+                    case 5:
+                        landscape = "body of water";
+                        break;
+                    case 6:
+                        landscape = "ruin";
+                        break;
+                    case 7:
+                        landscape = "crash site";
+                        break;
+                }
+
+                Console.WriteLine("You see that " + landscapeDistance + " metres away is a " + landscape);
+                Console.WriteLine("What do you do?");
+                Console.WriteLine("Approach - Approach the " + landscape);
+                Console.WriteLine("Return - Return to the ship");
+                string input = Console.ReadLine().ToLower();
+                if (input == "return")
+                {
+                    p.inShip = true;
+                    Console.WriteLine("You returned to your ship.");
+                    p.health = 100;
+                    Console.WriteLine("Health returned to 100%");
+                    CmdList();
+                }
+                if (input == "approach")
+                {
+                int health = p.health;
+                //5kmph / speed rate eg 5/75%
+                double speed = 5 * (p.speed / 100);
+                double metresMin = (speed * 1000) / 60;
+                //full health= 7hrs oxygen aka 420 mins
+                
+                    oxygenMins = (oxygenMins - (landscapeDistance / metresMin));
+                   Console.WriteLine("You arrived at the " + landscape);
+                    Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins + 
+                        " Planet: " + s.location + "    Weather: " + Weather(s.location));
+                Console.ReadLine();
+                if (landscape == "building")
+                {
+                    Building();
+                }
+                if (landscape == "forrest")
+                {
+                    Forrest();
+                }
+                if (landscape == "cave")
+                {
+                    Cave();
+                }
+                if (landscape == "mountain")
+                {
+                    Mountain();
+    
+                }
+                if (landscape == "body of water")
+                {
+                    Water();
+                }
+                if (landscape == "ruin")
+                {
+                    Ruin();
+                }
+                if (landscape == "crash site")
+                {
+                    CrashSite();
+                }
+            }
+         }
+
+        public static void Building()
+        {
+            Console.WriteLine("Now youre closer to the building, you notice a door, you have "+oxygenMins+"mins left of oxygen");
+            Console.ReadLine();
+        }
+        public static void Forrest()
+        {
+            Console.WriteLine("Now youre closer to the forrest, you notice a SOMETHING, you have " + oxygenMins + "mins left of oxygen");
+            Console.ReadLine();
+        }
+        public static void Cave()
+        {
+            Console.WriteLine("Now youre closer to the cave, you notice a ssas, you have " + oxygenMins + "mins left of oxygen");
+            Console.ReadLine();
+        }
+        public static void Mountain()
+        {
+            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
+            Console.ReadLine();
+        }
+        public static void Water()
+        {
+            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
+            Console.ReadLine();
+        }
+        public static void Ruin()
+        {
+            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
+            Console.ReadLine();
+        }
+        public static void CrashSite()
+        {
+            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
+            Console.ReadLine();
+        }
+
+        public static void GameOver()
+        {
+            String gameOverLogo = @"
+            
+  ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███  
+ ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀    ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒
+▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███      ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒
+░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄    ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄  
+░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒   ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒
+ ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░   ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░
+  ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░     ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░
+░ ░   ░   ░   ▒   ░      ░      ░      ░ ░ ░ ▒       ░░     ░     ░░   ░ 
+      ░       ░  ░       ░      ░  ░       ░ ░        ░     ░  ░   ░     
+                                                     ░                   
+";          Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(gameOverLogo);
+            Console.WriteLine("You died.");
+            Console.ForegroundColor = ConsoleColor.White;
+            
+        }
+
+        /**
+        static void building()
+        {
+            Console.WriteLine("You see a building in the distance.");
+            Console.WriteLine("What do you do?");
+            Console.WriteLine("Approach - Approach the building\nReturn - return to ship");
+            string input = Console.ReadLine().ToLower();
+            if (input =="approach")
+            {
+                switch(approachBuilding){
+                    case "sucessful":
+                        break;
+                    case "weather changes":
+                        break;
+                    case "alien attack":
+                        gameOver();
+                        break;
+
+                }
+            }
+            else if (input =="return")
+            {
+                p.inShip = true;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You entered the ship");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else
+            {
+                Console.WriteLine("Sorry I dont undeerstand that answer, try again.");
+                building();
+            }
+        }
+    **/
+
+           
         static void Main(string[] args)
         {
+
             string[] inventory = new string[7];
             Planet[] planets = new Planet[9];
             Ship s = new Ship();
             Player p = new Player();
+            String planetName = s.location;
+            p.health = 100;
+            p.speed = 100;
+
+            int health = p.health;
+            //5kmph / speed rate eg 5/75%
+            Adventure.speed = 5 * (p.speed / 100);
+            Adventure.metresMin = (speed * 1000) / 60;
+            //full health= 7hrs oxygen aka 420 mins
+            Adventure.oxygenMins = health * 4.2;
+            
+
+            Game(inventory, planets, s, p);
+        }
+        static void Game(string[] inventory, Planet[] planets, Ship s, Player p) { 
             GameInitialization(ref p, ref s, planets);
             StartUp();
             SetDifficulty(s);
-            while (true)
+            while (p.inShip==true)
             {
-                questCaller(planets, s, p);
-                cmdList();
+                
+                QuestCaller(planets, s, p);
+                CmdList();
                 
                 string input = Console.ReadLine().ToLower();
 
@@ -687,7 +1144,7 @@ namespace AdventureGame
                     Console.Write("Enter planet to fly to: ");
                     Console.ForegroundColor = ConsoleColor.White;
                     input = Console.ReadLine().ToLower();
-                    travel(ref s,p, input, planets);
+                    Travel(ref s,p, input, planets);
 
                 }
                 else if (input == "exit")
@@ -696,6 +1153,7 @@ namespace AdventureGame
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You exited the ship");
                     Console.ForegroundColor = ConsoleColor.White;
+                    Landscape(s,p);
                 }
                 else if (input == "enter")
                 {
