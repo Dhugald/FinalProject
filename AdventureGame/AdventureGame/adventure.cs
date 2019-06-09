@@ -1156,8 +1156,8 @@
                 if (choice == "bury")
                 {
                         Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
-                        string findings = "";
-                        int chance = rnd.Next(100);
+                        findings = "";
+                        int chance = rand.Next(100);
                         oxygenMins = oxygenMins - 2;
                         switch (chance)
                         {
@@ -1166,6 +1166,7 @@
                                 break;
                             case 81 - 90:
                                 findings = "a bag";
+                                break;
 
                                     }
                                     Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
