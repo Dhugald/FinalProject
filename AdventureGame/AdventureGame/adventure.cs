@@ -15,7 +15,6 @@
                     {
                         public int health;
                         public int speed;
-                        public int researchPoints;
                         public bool inShip;
                     }
                     public struct Ship
@@ -29,7 +28,6 @@
                         public string name;
                         public string environmnet;
                         public int fuelDistance;
-                        public bool task;
                     }
                     /**
                     public static void Venus(Planet[] planets)
@@ -1153,8 +1151,8 @@
                         Console.WriteLine("You take a moment of silence and respect the fallen.");
                         oxygenMins = oxygenMins - 2;
                     }
-                if (choice == "bury")
-                {
+                    if (choice == "bury")
+                    {
                         Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
                         findings = "";
                         int chance = rand.Next(100);
@@ -1176,12 +1174,13 @@
                                         Detail(findings, p);
                                     }
 
-                                }
+                    }
                                 if (choice == "avoid")
                                 {
                                     Console.WriteLine("You avoided the skeleton.");
                                     oxygenMins = oxygenMins - 1;
                                 }
+                               
                             }
                             if (detailIn == "a bag")
                             {
