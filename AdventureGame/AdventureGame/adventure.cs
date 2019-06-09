@@ -9,6 +9,7 @@ namespace AdventureGame
         public static double oxygenMins;
         public static double speed;
         public static double metresMin;
+        public static string landscape;
 
         public struct Player
         {
@@ -924,7 +925,7 @@ namespace AdventureGame
                 Random rnd = new Random();
                 int landscapeDistance = rnd.Next(1, 1000);
 
-                string landscape = "";
+                
 
                 int landscapeSwitch;
                 landscapeSwitch = rnd.Next(1, 8);
@@ -967,86 +968,184 @@ namespace AdventureGame
                     Console.WriteLine("Health returned to 100%");
                     CmdList();
                 }
-                if (input == "approach")
-                {
+            if (input == "approach")
+            {
                 int health = p.health;
                 //5kmph / speed rate eg 5/75%
                 double speed = 5 * (p.speed / 100);
                 double metresMin = (speed * 1000) / 60;
                 //full health= 7hrs oxygen aka 420 mins
-                
-                    oxygenMins = (oxygenMins - (landscapeDistance / metresMin));
-                   Console.WriteLine("You arrived at the " + landscape);
-                    Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins + 
-                        " Planet: " + s.location + "    Weather: " + Weather(s.location));
-                Console.ReadLine();
-                if (landscape == "building")
-                {
-                    Building();
-                }
-                if (landscape == "forrest")
-                {
-                    Forrest();
-                }
-                if (landscape == "cave")
-                {
-                    Cave();
-                }
-                if (landscape == "mountain")
-                {
-                    Mountain();
-    
-                }
-                if (landscape == "body of water")
-                {
-                    Water();
-                }
-                if (landscape == "ruin")
-                {
-                    Ruin();
-                }
-                if (landscape == "crash site")
-                {
-                    CrashSite();
-                }
+
+                oxygenMins = (oxygenMins - (landscapeDistance / metresMin));
+                Console.WriteLine("You arrived at the " + landscape);
+                Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins +
+                    " Planet: " + s.location + "    Weather: " + Weather(s.location));
+                LocationItem(p);
             }
+            
          }
 
-        public static void Building()
+        public static void ShipReturn(Player p)
         {
-            Console.WriteLine("Now youre closer to the building, you notice a door, you have "+oxygenMins+"mins left of oxygen");
-            Console.ReadLine();
+            Random rnd = new Random();
+            
+            double used = 420 - oxygenMins;
+            string returnChoice;
+            int chance = rnd.Next(1 - 100);
+            if (used > oxygenMins)
+            {
+                
+                oxygenMins = oxygenMins - used;
+                Console.WriteLine("You made it outside your ship with " + oxygenMins + " mins left!");
+                p.inShip = true;
+                oxygenMins = 420;
+            }
+            else
+            {
+                
+                Console.WriteLine("Not enough reccomended amount of oxygen left to return.");
+                Console.WriteLine("What do you do?");
+                Console.WriteLine("Return - Risk it, and return to ship\nLook - look for oxygen supply nearby");
+                returnChoice = Console.ReadLine().ToLower();
+                if (returnChoice == "return")
+                {
+                    switch (chance)
+                    {
+                        case 1 - 90:
+                            
+                            Console.WriteLine("You ran out of oxygen");
+                            GameOver();
+                            break;
+                        case 91 - 100:
+                            
+                            Console.WriteLine("By some miricle, you made it back to the ship!");
+                            p.inShip = true;
+                            break;
+                    }
+
+                }
+                if (returnChoice == "look")
+                {
+                    switch (chance)
+                    {
+                        case 1 - 90:
+                            
+                            Console.WriteLine("You ran out of oxygen");
+                            GameOver();
+                            break;
+                        case 91 - 100:
+                            
+                            Console.WriteLine("By some miricle, you found enough oxygen to make it back to the ship!");
+                            p.inShip = true;
+                            break;
+                    }
+                }
+            }
         }
-        public static void Forrest()
+        public static void Detail(string detailIn, Player p)
         {
-            Console.WriteLine("Now youre closer to the forrest, you notice a SOMETHING, you have " + oxygenMins + "mins left of oxygen");
-            Console.ReadLine();
+            string choice;
+            if (detailIn=="a door")
+            {
+                Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
+                                    "Return - Return to the ship");
+                choice = Console.ReadLine().ToLower();
+                if (choice == "open")
+                {
+
+                }
+                if (choice == "force")
+                {
+
+                }
+                if (choice == "knock")
+                {
+
+                }
+                if (choice == "return")
+                {
+                    ShipReturn(p);
+                }
+            }
+            if (detailIn == "a skeleton")
+            {
+                Console.WriteLine("Search - search the skeleton\nRespects - Pay respect and take a moment of silence\n" +
+                    "Bury - Bury the skeleton\nAvoid - Walk away from the skeleton" +
+                                    "Return - Return to the ship");
+                choice = Console.ReadLine().ToLower();
+                if (choice == "return")
+                {
+                    ShipReturn(p);
+                }
+            }
+            if (detailIn == "a bag")
+                {
+
+                }
+            if (detailIn == "an engraving")
+            {
+
+            }
+            if (detailIn == "a book")
+            {
+
+            }
         }
-        public static void Cave()
+        public static void LocationItem(Player p)
         {
-            Console.WriteLine("Now youre closer to the cave, you notice a ssas, you have " + oxygenMins + "mins left of oxygen");
-            Console.ReadLine();
+            int detailSwitch=0;
+            Random rnd = new Random();
+            if (landscape=="building")
+            {
+                detailSwitch = rnd.Next(1, 5);
+            }
+            if (landscape == "cave")
+            {
+                detailSwitch = rnd.Next(2, 5);
+            }
+            if (landscape == "mountain")
+            {
+                detailSwitch = rnd.Next(2, 5);
+            }
+            if (landscape == "body of water")
+            {
+                detailSwitch = rnd.Next(2, 5);
+            }
+            if (landscape == "forrest")
+            {
+                detailSwitch = rnd.Next(2, 5);
+            }
+            if (landscape == "ruin")
+            {
+                detailSwitch = rnd.Next(1, 5);
+            }
+            if (landscape == "crash site")
+            {
+                detailSwitch = rnd.Next(1, 5);
+            }
+            
+            string detail="";
+            switch (detailSwitch)
+            {
+                case 1:
+                    detail = "a door";
+                    break;
+                case 2:
+                    detail = "a skeleton";
+                    break;
+                case 3:
+                    detail = "a bag";
+                    break;
+                case 4:
+                    detail = "an engraving";
+                    break;
+                case 5:
+                    detail = "a book";
+                    break;
+            }
+            Detail(detail, p);
         }
-        public static void Mountain()
-        {
-            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
-            Console.ReadLine();
-        }
-        public static void Water()
-        {
-            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
-            Console.ReadLine();
-        }
-        public static void Ruin()
-        {
-            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
-            Console.ReadLine();
-        }
-        public static void CrashSite()
-        {
-            Console.WriteLine("Now youre closer to the building, you notice a door, you have " + oxygenMins + "mins left of oxygen");
-            Console.ReadLine();
-        }
+       
 
         public static void GameOver()
         {
