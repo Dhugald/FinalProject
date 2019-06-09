@@ -1046,9 +1046,9 @@
             Random rand = new Random();
             string choice;
 
-            int doorChance = rand.Next(1 - 10);
+            int doorChance = rand.Next(1, 10);
            
-            if (detailIn=="a door")
+            if (detailIn == "a door")
             {
                 Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
                                     "Return - Return to the ship");
