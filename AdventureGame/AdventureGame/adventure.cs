@@ -307,27 +307,27 @@
                         ShipSetup(ref s);
                         PlayerSetup(ref p);
                         planets[1].name = "Mercury";
-                        planets[1].fuelDistance = 100;
+                        planets[1].fuelDistance = 20;
                         planets[2].environmnet = "something";
                         planets[2].name = "Venus";
-                        planets[2].fuelDistance = 150;
+                        planets[2].fuelDistance = 25;
                         planets[3].name = "Earth";
-                        planets[3].fuelDistance = 200;
+                        planets[3].fuelDistance = 30;
                         planets[4].environmnet = "something";
                         planets[4].name = "Mars";
-                        planets[4].fuelDistance = 250;
+                        planets[4].fuelDistance = 40;
                         planets[5].environmnet = "something";
                         planets[5].name = "Jupiter";
-                        planets[5].fuelDistance = 300;
+                        planets[5].fuelDistance = 50;
                         planets[6].environmnet = "something";
                         planets[6].name = "Saturn";
-                        planets[6].fuelDistance = 350;
+                        planets[6].fuelDistance = 55;
                         planets[7].environmnet = "something";
                         planets[7].name = "Uranus";
-                        planets[7].fuelDistance = 400;
+                        planets[7].fuelDistance = 60;
                         planets[8].environmnet = "something";
                         planets[8].name = "Neptune";
-                        planets[8].fuelDistance = 450;
+                        planets[8].fuelDistance = 80;
 
                     }
 
@@ -583,6 +583,7 @@
                                             Console.WriteLine("You successfully arrived to earth.\n");
                                             Console.ForegroundColor = ConsoleColor.White;
                                             Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
+                                            Earth(p, s);
                                             break;
                                         case "mars":
                                             s.location = "mars";
@@ -981,6 +982,18 @@
                             LocationItem(p);
                         }
 
+                    }
+
+                    public static void Earth(Player p, Ship s)
+                    {
+                        Console.WriteLine($"You arrive at Mission control, they repair and refuel the ship.\n");
+                        s.health = 100;
+                        s.fuel = 100;
+                        oxygenMins = 420;
+                        Console.WriteLine($"Ship health is at {s.health}%  and ship fuel is at {s.fuel}%\n");
+                        Console.WriteLine($"You also find two new oxygen tanks, so you swap yours out.\n");
+                        Console.WriteLine($"Oxygen now at {oxygenMins}");
+                        
                     }
 
                     public static void ShipReturn(Player p)
