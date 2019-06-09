@@ -645,13 +645,15 @@
                         }
 
                     }
-                    public static void CmdList()
+                    public static void CmdList(Player p)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
                         Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
-                        Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        if(!p.inShip) {
+                            Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
                     }
                     public static void QuestCaller(Planet[] planets, Ship s, Player p)
                     {
@@ -965,7 +967,7 @@
                     Console.WriteLine("You returned to your ship.");
                     p.health = 100;
                     Console.WriteLine("Health returned to 100%");
-                    CmdList();
+                    CmdList(p);
                 }
             if (input == "approach")
             {
@@ -1059,9 +1061,9 @@
             Random rand = new Random();
             string choice;
 
-            int doorChance = rand.Next(1 - 10);
+            int doorChance = rand.Next(10);
            
-            if (detailIn=="a door")
+            if (detailIn == "a door")
             {
                 Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
                                     "Return - Return to the ship");
@@ -1070,11 +1072,11 @@
                 {
                     switch (doorChance)
                     {
-                        case 1 - 7:
+                        case 0 - 6:
                             Console.WriteLine("The door is locked. you need a key.\n");
                             oxygenMins = oxygenMins - 10;
                             break;
-                        case 8 - 9:
+                        case 7 - 9:
                             Console.WriteLine("The door is unlocked, so you enter.\n");
                             oxygenMins = oxygenMins - 30;
                             oxygenMins = oxygenMins + 210;
@@ -1086,12 +1088,12 @@
                 {
                     switch (doorChance)
                     {
-                        case 1 - 7:
+                        case 0 - 6:
                             Console.WriteLine("You fail to open the door, you lose 25 health in the process.\n");
                             p.health = p.health - 25;
                             Console.WriteLine($"Your health is now {p.health}\n");
                             break;
-                        case 8 - 9:
+                        case 7 - 9:
                             Console.WriteLine("You manage to force the door open, you enter the room.\n");
                             p.health = p.health - 10;
                             Console.WriteLine($"You use 30 minutes of oxygen trying to force the door.\n");
@@ -1106,7 +1108,7 @@
                 {
                     switch (doorChance)
                     {
-                        case 1 - 8:
+                        case 0 - 8:
                             Console.WriteLine($"There is no reply to the knock./n");
                             break;
                         case 9:
@@ -1178,13 +1180,14 @@
                             case 81 - 90:
                                 findings = "a bag";
                                 break;
-                        }
-                        Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
-                        oxygenMins = oxygenMins - 60;
-                        if (findings == "a bag")
-                        {
-                            Detail(findings, p);
-                        }
+
+                                    }
+                                    Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
+                                    oxygenMins = oxygenMins - 60;
+                                    if (findings == "a bag")
+                                    {
+                                        Detail(findings, p);
+                                    }
 
                     }
                                 if (choice == "avoid")
@@ -1196,15 +1199,36 @@
                             }
                             if (detailIn == "a bag")
                             {
+                                     
 
                             }
                             if (detailIn == "an engraving")
                             {
+                    int chance = rand.Next(1, 3);
+                    string engraving = "";
+                            switch (chance)
+                             {
+                        case 1:
+                            engraving = "WARNING!";
+                            break;
+                        case 2:
+                            engraving = "Welcome.";
+                            break;
+                        case 3:
+                            engraving = "TURN BACK!!!";
+                            break;
+                               }
+                    Console.WriteLine("You come across an engraving. The engraving says: " + engraving);
+                    if (engraving == "WARNING!")
+                    {
+                        Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
+
+                    }
 
                             }
                             if (detailIn == "a book")
                             {
-
+                                
                             }
                         }
                     }
@@ -1262,6 +1286,7 @@
                         }
                         Detail(detail, p);
                     }
+
 
                 
                 public static void GameOver()
@@ -1342,25 +1367,27 @@
 
                         Game(inventory, planets, s, p);
                     }
-                    static void Game(string[] inventory, Planet[] planets, Ship s, Player p) { 
-                        GameInitialization(ref p, ref s, planets);
-                        StartUp();
-                        SetDifficulty(s);
-                        while (p.inShip==true)
-                        {
-                
-                QuestCaller(planets, s, p);
-                CmdList();
-                
-                            string input = Console.ReadLine().ToLower();
 
-                            if (input == "fly")
-                            {
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.Write("Enter planet to fly to: ");
-                                Console.ForegroundColor = ConsoleColor.White;
-                                input = Console.ReadLine().ToLower();
-                                Travel(ref s,p, input, planets);
+        static void Game(string[] inventory, Planet[] planets, Ship s, Player p)
+        {
+            GameInitialization(ref p, ref s, planets);
+            StartUp();
+            SetDifficulty(s);
+            while (p.inShip == true)
+            {
+
+                QuestCaller(planets, s, p);
+                CmdList(p);
+
+                string input = Console.ReadLine().ToLower();
+
+                if (input == "fly")
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("Enter planet to fly to: ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    input = Console.ReadLine().ToLower();
+                    Travel(ref s, p, input, planets);
 
                 }
                 else if (input == "exit")
@@ -1369,7 +1396,7 @@
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You exited the ship");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Landscape(s,p);
+                    Landscape(s, p);
                 }
                 else if (input == "enter")
                 {
@@ -1378,7 +1405,6 @@
                     Console.WriteLine("You entered the ship");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-
                 
             }
         }
