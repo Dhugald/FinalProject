@@ -1052,9 +1052,9 @@ namespace AdventureGame
             Random rand = new Random();
             string choice;
 
-            int doorChance = rand.Next(1,10);
-           
-            if (detailIn=="a door")
+            int doorChance = rand.Next(1 - 10);
+
+            if (detailIn == "a door")
             {
                 Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
                                     "Return - Return to the ship");
@@ -1161,7 +1161,7 @@ namespace AdventureGame
                     {
                         Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
                         string findings = "";
-                        int chance = rnd.Next(100);
+                        int chance = rand.Next(100);
                         oxygenMins = oxygenMins - 2;
                         switch (chance)
                         {
@@ -1169,7 +1169,8 @@ namespace AdventureGame
                                 findings = "nothing";
                                 break;
                             case 81 - 90:
-                                findings = ""
+                                findings = "";
+                                break;
 
                         }
 
