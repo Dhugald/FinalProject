@@ -1046,7 +1046,7 @@
             Random rand = new Random();
             string choice;
 
-            int doorChance = rand.Next(1, 10);
+            int doorChance = rand.Next(10);
            
             if (detailIn == "a door")
             {
@@ -1057,11 +1057,11 @@
                 {
                     switch (doorChance)
                     {
-                        case 1 - 7:
+                        case 0 - 6:
                             Console.WriteLine("The door is locked. you need a key.\n");
                             oxygenMins = oxygenMins - 10;
                             break;
-                        case 8 - 9:
+                        case 7 - 9:
                             Console.WriteLine("The door is unlocked, so you enter.\n");
                             oxygenMins = oxygenMins - 30;
                             oxygenMins = oxygenMins + 210;
