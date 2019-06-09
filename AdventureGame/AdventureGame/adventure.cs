@@ -1167,13 +1167,14 @@
                             case 81 - 90:
                                 findings = "a bag";
                                 break;
-                        }
-                        Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
-                        oxygenMins = oxygenMins - 60;
-                        if (findings == "a bag")
-                        {
-                            Detail(findings, p);
-                        }
+
+                                    }
+                                    Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
+                                    oxygenMins = oxygenMins - 60;
+                                    if (findings == "a bag")
+                                    {
+                                        Detail(findings, p);
+                                    }
 
                     }
                                 if (choice == "avoid")
