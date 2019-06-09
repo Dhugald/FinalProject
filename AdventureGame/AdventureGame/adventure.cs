@@ -1117,7 +1117,7 @@ namespace AdventureGame
                 if (choice == "search")
                 {
                     string findings = "";
-                    int option = rnd.Next(1,3);
+                    int option = rand.Next(1,3);
                     switch (option)
                     {
                         case 1:
