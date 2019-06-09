@@ -15,7 +15,6 @@
                     {
                         public int health;
                         public int speed;
-                        public int researchPoints;
                         public bool inShip;
                     }
                     public struct Ship
@@ -29,7 +28,6 @@
                         public string name;
                         public string environmnet;
                         public int fuelDistance;
-                        public bool task;
                     }
                     /**
                     public static void Venus(Planet[] planets)
@@ -1153,11 +1151,11 @@
                         Console.WriteLine("You take a moment of silence and respect the fallen.");
                         oxygenMins = oxygenMins - 2;
                     }
-                if (choice == "bury")
-                {
+                    if (choice == "bury")
+                    {
                         Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
-                        string findings = "";
-                        int chance = rnd.Next(100);
+                        findings = "";
+                        int chance = rand.Next(100);
                         oxygenMins = oxygenMins - 2;
                         switch (chance)
                         {
@@ -1166,21 +1164,22 @@
                                 break;
                             case 81 - 90:
                                 findings = "a bag";
+                                break;
+                        }
+                        Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
+                        oxygenMins = oxygenMins - 60;
+                        if (findings == "a bag")
+                        {
+                            Detail(findings, p);
+                        }
 
-                                    }
-                                    Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
-                                    oxygenMins = oxygenMins - 60;
-                                    if (findings == "a bag")
-                                    {
-                                        Detail(findings, p);
-                                    }
-
-                                }
+                    }
                                 if (choice == "avoid")
                                 {
                                     Console.WriteLine("You avoided the skeleton.");
                                     oxygenMins = oxygenMins - 1;
                                 }
+                               
                             }
                             if (detailIn == "a bag")
                             {
