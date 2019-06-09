@@ -646,12 +646,16 @@ namespace AdventureGame
             }
 
         }
-        public static void CmdList()
+        public static void CmdList(Player p)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
-            Console.WriteLine("Exit".PadRight(7) + "- To exit ship");         
-            Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+            Console.WriteLine("Exit".PadRight(7) + "- To exit ship");  
+            if(!p.inShip)
+            {
+                Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+            }
+            
             Console.ForegroundColor = ConsoleColor.White;
         }
         public static void QuestCaller(Planet[] planets, Ship s, Player p)
@@ -966,7 +970,7 @@ namespace AdventureGame
                     Console.WriteLine("You returned to your ship.");
                     p.health = 100;
                     Console.WriteLine("Health returned to 100%");
-                    CmdList();
+                    CmdList(p);
                 }
             if (input == "approach")
             {
@@ -1048,9 +1052,9 @@ namespace AdventureGame
             Random rand = new Random();
             string choice;
 
-            int doorChance = rand.Next(1 - 10);
-
-            if (detailIn == "a door")
+            int doorChance = rand.Next(1,10);
+           
+            if (detailIn=="a door")
             {
                 Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
                                     "Return - Return to the ship");
@@ -1128,7 +1132,7 @@ namespace AdventureGame
                 if (choice == "search")
                 {
                     string findings = "";
-                    int option = rand.Next(1, 3);
+                    int option = rand.Next(1,3);
                     switch (option)
                     {
                         case 1:
@@ -1143,18 +1147,18 @@ namespace AdventureGame
                     }
                     oxygenMins = oxygenMins - 5;
                     Console.WriteLine("You found " + findings + " on the skeleton");
-                    if (findings == "a book" || findings == "a bag")
+                    if (findings == "a book"|| findings=="a bag")
                     {
                         Detail(findings, p);
                     }
-
-                    if (choice == "respect")
-                    {
+                    
+                if (choice == "respect")
+                {
                         Console.WriteLine("You take a moment of silence and respect the fallen.");
                         oxygenMins = oxygenMins - 2;
                     }
-                    if (choice == "bury")
-                    {
+                if (choice == "bury")
+                {
                         Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
                         string findings = "";
                         int chance = rnd.Next(100);
@@ -1165,28 +1169,27 @@ namespace AdventureGame
                                 findings = "nothing";
                                 break;
                             case 81 - 90:
-                                findings = ""
+                                findings=""
 
                         }
 
                     }
-                    if (choice == "avoid")
-                    {
-
-                    }
+                if (choice == "avoid")
+                {
+                    
                 }
-                if (detailIn == "a bag")
+            }
+            if (detailIn == "a bag")
                 {
 
                 }
-                if (detailIn == "an engraving")
-                {
+            if (detailIn == "an engraving")
+            {
 
-                }
-                if (detailIn == "a book")
-                {
+            }
+            if (detailIn == "a book")
+            {
 
-                }
             }
         }
         public static void LocationItem(Player p)
@@ -1331,7 +1334,7 @@ namespace AdventureGame
             {
                 
                 QuestCaller(planets, s, p);
-                CmdList();
+                CmdList(p);
                 
                 string input = Console.ReadLine().ToLower();
 
@@ -1354,13 +1357,14 @@ namespace AdventureGame
                 }
                 else if (input == "enter")
                 {
-                    p.inShip = true;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You entered the ship");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-
-                
+                    if (!p.inShip)
+                    {
+                        p.inShip = true;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("You entered the ship");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }               
             }
         }
     }
