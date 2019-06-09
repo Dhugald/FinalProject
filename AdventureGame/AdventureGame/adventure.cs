@@ -1049,8 +1049,8 @@ namespace AdventureGame
             string choice;
 
             int doorChance = rand.Next(1 - 10);
-           
-            if (detailIn=="a door")
+
+            if (detailIn == "a door")
             {
                 Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
                                     "Return - Return to the ship");
@@ -1128,7 +1128,7 @@ namespace AdventureGame
                 if (choice == "search")
                 {
                     string findings = "";
-                    int option = rnd.Next(1,3);
+                    int option = rand.Next(1, 3);
                     switch (option)
                     {
                         case 1:
@@ -1143,21 +1143,21 @@ namespace AdventureGame
                     }
                     oxygenMins = oxygenMins - 5;
                     Console.WriteLine("You found " + findings + " on the skeleton");
-                    if (findings == "a book"|| findings=="a bag")
+                    if (findings == "a book" || findings == "a bag")
                     {
                         Detail(findings, p);
                     }
-                    
-                if (choice == "respect")
-                {
+
+                    if (choice == "respect")
+                    {
                         Console.WriteLine("You take a moment of silence and respect the fallen.");
                         oxygenMins = oxygenMins - 2;
                     }
-                if (choice == "bury")
-                {
+                    if (choice == "bury")
+                    {
                         Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
                         string findings = "";
-                        int chance = rnd.Next(100);
+                        int chance = rand.Next(100);
                         oxygenMins = oxygenMins - 2;
                         switch (chance)
                         {
@@ -1165,27 +1165,29 @@ namespace AdventureGame
                                 findings = "nothing";
                                 break;
                             case 81 - 90:
-                                findings=""
+                                findings = "";
+                                break;
 
                         }
 
                     }
-                if (choice == "avoid")
-                {
-                    
+                    if (choice == "avoid")
+                    {
+
+                    }
                 }
-            }
-            if (detailIn == "a bag")
+                if (detailIn == "a bag")
                 {
 
                 }
-            if (detailIn == "an engraving")
-            {
+                if (detailIn == "an engraving")
+                {
 
-            }
-            if (detailIn == "a book")
-            {
+                }
+                if (detailIn == "a book")
+                {
 
+                }
             }
         }
         public static void LocationItem(Player p)
