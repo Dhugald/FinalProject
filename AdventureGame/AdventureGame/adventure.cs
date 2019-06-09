@@ -646,12 +646,16 @@ namespace AdventureGame
             }
 
         }
-        public static void CmdList()
+        public static void CmdList(Player p)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
-            Console.WriteLine("Exit".PadRight(7) + "- To exit ship");         
-            Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+            Console.WriteLine("Exit".PadRight(7) + "- To exit ship");  
+            if(!p.inShip)
+            {
+                Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
+            }
+            
             Console.ForegroundColor = ConsoleColor.White;
         }
         public static void QuestCaller(Planet[] planets, Ship s, Player p)
@@ -966,7 +970,7 @@ namespace AdventureGame
                     Console.WriteLine("You returned to your ship.");
                     p.health = 100;
                     Console.WriteLine("Health returned to 100%");
-                    CmdList();
+                    CmdList(p);
                 }
             if (input == "approach")
             {
@@ -1048,7 +1052,7 @@ namespace AdventureGame
             Random rand = new Random();
             string choice;
 
-            int doorChance = rand.Next(1 - 10);
+            int doorChance = rand.Next(1,10);
            
             if (detailIn=="a door")
             {
@@ -1270,7 +1274,7 @@ namespace AdventureGame
             {
                 
                 QuestCaller(planets, s, p);
-                CmdList();
+                CmdList(p);
                 
                 string input = Console.ReadLine().ToLower();
 
@@ -1293,13 +1297,14 @@ namespace AdventureGame
                 }
                 else if (input == "enter")
                 {
-                    p.inShip = true;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You entered the ship");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-
-                
+                    if (!p.inShip)
+                    {
+                        p.inShip = true;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("You entered the ship");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }               
             }
         }
     }
