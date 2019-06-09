@@ -1254,6 +1254,7 @@
                         Detail(detail, p);
                     }
 
+
                 
                 public static void GameOver()
                 {
@@ -1333,25 +1334,27 @@
 
                         Game(inventory, planets, s, p);
                     }
-                    static void Game(string[] inventory, Planet[] planets, Ship s, Player p) { 
-                        GameInitialization(ref p, ref s, planets);
-                        StartUp();
-                        SetDifficulty(s);
-                        while (p.inShip==true)
-                        {
-                
+
+        static void Game(string[] inventory, Planet[] planets, Ship s, Player p)
+        {
+            GameInitialization(ref p, ref s, planets);
+            StartUp();
+            SetDifficulty(s);
+            while (p.inShip == true)
+            {
+
                 QuestCaller(planets, s, p);
                 CmdList(p);
-                
-                            string input = Console.ReadLine().ToLower();
 
-                            if (input == "fly")
-                            {
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.Write("Enter planet to fly to: ");
-                                Console.ForegroundColor = ConsoleColor.White;
-                                input = Console.ReadLine().ToLower();
-                                Travel(ref s,p, input, planets);
+                string input = Console.ReadLine().ToLower();
+
+                if (input == "fly")
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("Enter planet to fly to: ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    input = Console.ReadLine().ToLower();
+                    Travel(ref s, p, input, planets);
 
                 }
                 else if (input == "exit")
@@ -1360,7 +1363,7 @@
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You exited the ship");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Landscape(s,p);
+                    Landscape(s, p);
                 }
                 else if (input == "enter")
                 {
@@ -1369,7 +1372,6 @@
                     Console.WriteLine("You entered the ship");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-
                 
             }
         }
