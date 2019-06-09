@@ -1188,6 +1188,26 @@
                             }
                             if (detailIn == "an engraving")
                             {
+                    int chance = rand.Next(1, 3);
+                    string engraving = "";
+                            switch (chance)
+                             {
+                        case 1:
+                            engraving = "WARNING!";
+                            break;
+                        case 2:
+                            engraving = "Welcome.";
+                            break;
+                        case 3:
+                            engraving = "TURN BACK!!!";
+                            break;
+                               }
+                    Console.WriteLine("You come across an engraving. The engraving says: " + engraving);
+                    if (engraving == "WARNING!")
+                    {
+                        Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
+
+                    }
 
                             }
                             if (detailIn == "a book")
