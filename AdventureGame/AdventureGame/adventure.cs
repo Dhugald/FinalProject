@@ -1042,9 +1042,14 @@ namespace AdventureGame
                 }
             }
         }
+
         public static void Detail(string detailIn, Player p)
         {
+            Random rand = new Random();
             string choice;
+
+            int doorChance = rand.Next(1 - 10);
+           
             if (detailIn=="a door")
             {
                 Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
@@ -1052,15 +1057,47 @@ namespace AdventureGame
                 choice = Console.ReadLine().ToLower();
                 if (choice == "open")
                 {
-
+                    switch (doorChance)
+                    {
+                        case 1 - 7:
+                            Console.WriteLine("The door is locked. you need a key.\n");
+                            break;
+                        case 8 - 9:
+                            Console.WriteLine("The door is unlocked, so you enter.\n");
+                            oxygenMins = oxygenMins + 210;
+                            Console.WriteLine($"In the room you find an oxygen tank, oxygen now at {oxygenMins} minutes of oxygen.");
+                            break;
+                    }
                 }
                 if (choice == "force")
                 {
-
+                    switch (doorChance)
+                    {
+                        case 1 - 7:
+                            Console.WriteLine("You fail to open the door, you lose 25 health in the process.\n");
+                            p.health = p.health - 25;
+                            Console.WriteLine($"Your health is now {p.health}\n");
+                            break;
+                        case 8 - 9:
+                            Console.WriteLine("You manage to force the door open, you enter the room.\n");
+                            p.health = p.health - 10;
+                            oxygenMins = oxygenMins + 210;
+                            Console.WriteLine($"You lose some health trying. Health is now {p.health}\n.");
+                            Console.WriteLine($"You also find an oxygen tank in the room! Oxygen now at {oxygenMins} minutes of oxygen.");
+                            break;
+                    }
                 }
                 if (choice == "knock")
                 {
-
+                    switch (doorChance)
+                    {
+                        case 1 - 8:
+                            Console.WriteLine($"There is no reply to the knock./n");
+                            break;
+                        case 9:
+                            Console.WriteLine($"Something replys to the knock and you hear the door open.\n");
+                            break;
+                    }
                 }
                 if (choice == "return")
                 {
