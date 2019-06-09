@@ -1073,12 +1073,12 @@
                 {
                     switch (doorChance)
                     {
-                        case 1 - 7:
+                        case 0 - 6:
                             Console.WriteLine("You fail to open the door, you lose 25 health in the process.\n");
                             p.health = p.health - 25;
                             Console.WriteLine($"Your health is now {p.health}\n");
                             break;
-                        case 8 - 9:
+                        case 7 - 9:
                             Console.WriteLine("You manage to force the door open, you enter the room.\n");
                             p.health = p.health - 10;
                             Console.WriteLine($"You use 30 minutes of oxygen trying to force the door.\n");
@@ -1093,7 +1093,7 @@
                 {
                     switch (doorChance)
                     {
-                        case 1 - 8:
+                        case 0 - 8:
                             Console.WriteLine($"There is no reply to the knock./n");
                             break;
                         case 9:
