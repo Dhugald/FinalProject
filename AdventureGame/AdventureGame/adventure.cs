@@ -1044,6 +1044,7 @@ namespace AdventureGame
         }
         public static void Detail(string detailIn, Player p)
         {
+            Random rnd = new Random();
             string choice;
             if (detailIn=="a door")
             {
@@ -1069,13 +1070,62 @@ namespace AdventureGame
             }
             if (detailIn == "a skeleton")
             {
-                Console.WriteLine("Search - search the skeleton\nRespects - Pay respect and take a moment of silence\n" +
+                Console.WriteLine("Search - search the skeleton\nRespect - Pay respect and take a moment of silence\n" +
                     "Bury - Bury the skeleton\nAvoid - Walk away from the skeleton" +
                                     "Return - Return to the ship");
                 choice = Console.ReadLine().ToLower();
                 if (choice == "return")
                 {
                     ShipReturn(p);
+                }
+                if (choice == "search")
+                {
+                    string findings = "";
+                    int option = rnd.Next(1,3);
+                    switch (option)
+                    {
+                        case 1:
+                            findings = "nothing.";
+                            break;
+                        case 2:
+                            findings = "a book";
+                            break;
+                        case 3:
+                            findings = "a bag";
+                            break;
+                    }
+                    oxygenMins = oxygenMins - 5;
+                    Console.WriteLine("You found " + findings + " on the skeleton");
+                    if (findings == "a book"|| findings=="a bag")
+                    {
+                        Detail(findings, p);
+                    }
+                    
+                if (choice == "respect")
+                {
+                        Console.WriteLine("You take a moment of silence and respect the fallen.");
+                        oxygenMins = oxygenMins - 2;
+                    }
+                if (choice == "bury")
+                {
+                        Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
+                        string findings = "";
+                        int chance = rnd.Next(100);
+                        oxygenMins = oxygenMins - 2;
+                        switch (chance)
+                        {
+                            case 1 - 80:
+                                findings = "nothing";
+                                break;
+                            case 81 - 90:
+                                findings=""
+
+                        }
+
+                    }
+                if (choice == "avoid")
+                {
+                    
                 }
             }
             if (detailIn == "a bag")
