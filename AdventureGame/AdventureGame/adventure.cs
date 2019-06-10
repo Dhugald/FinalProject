@@ -31,6 +31,7 @@ namespace AdventureGame
             public string environmnet;
             public int fuelDistance;
         }
+        public static bool havekey = false;
         /**
         public static void Venus(Planet[] planets)
         {
@@ -1072,6 +1073,7 @@ namespace AdventureGame
 
             {
                 int doorChance = rand.Next(10);
+                int roomSpawn = rand.Next(5);
                 Console.WriteLine("What do you do?");
                 Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
                                     "Return - Return to the ship");
@@ -1083,12 +1085,51 @@ namespace AdventureGame
                         case 0 - 6:
                             Console.WriteLine("The door is locked. you need a key.\n");
                             oxygenMins = oxygenMins - 10;
+                            if (havekey == true)
+                            {
+                                Console.WriteLine("Lucky for you, you already found the key!\n");
+                                switch (roomSpawn)
+                                {
+                                    case 0:
+                                        Console.WriteLine($"In the room is a skeleton!\n");
+                                        findings = "a skeleton";
+                                        Detail(findings, p);
+                                        break;
+                                    case 1 - 3:
+                                        Console.WriteLine($"You find an oxygen tank!\n");
+                                        oxygenMins = oxygenMins + 210;
+                                        Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
+                                        break;
+                                    case 4:
+                                        Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
+                                        findings = "an engraving";
+                                        Detail(findings, p);
+                                        break;
+                                }
+                                
+                            }
                             break;
                         case 7 - 9:
                             Console.WriteLine("The door is unlocked, so you enter.\n");
                             oxygenMins = oxygenMins - 30;
-                            oxygenMins = oxygenMins + 210;
-                            Console.WriteLine($"After searching the room  for a while you find an oxygen tank, oxygen now at {oxygenMins} minutes of oxygen.");
+                            switch (roomSpawn)
+                            {
+                                case 0:
+                                    Console.WriteLine($"In the room is a skeleton!\n");
+                                    findings = "a skeleton";
+                                    Detail(findings, p);
+                                    break;
+                                case 1 - 3:
+                                    Console.WriteLine($"You find an oxygen tank!\n");
+                                    oxygenMins = oxygenMins + 210;
+                                    Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
+                                    break;
+                                case 4:
+                                    Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
+                                    findings = "an engraving";
+                                    Detail(findings, p);
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -1106,9 +1147,25 @@ namespace AdventureGame
                             p.health = p.health - 10;
                             Console.WriteLine($"You use 30 minutes of oxygen trying to force the door.\n");
                             oxygenMins = oxygenMins - 30;
-                            oxygenMins = oxygenMins + 210;
                             Console.WriteLine($"You lose some health trying. Health is now {p.health}\n.");
-                            Console.WriteLine($"You also find an oxygen tank in the room! Oxygen now at {oxygenMins} minutes of oxygen.");
+                            switch (roomSpawn)
+                            {
+                                case 0:
+                                    Console.WriteLine($"In the room is a skeleton!\n");
+                                    findings = "a skeleton";
+                                    Detail(findings, p);
+                                    break;
+                                case 1 - 3:
+                                    Console.WriteLine($"You find an oxygen tank!\n");
+                                    oxygenMins = oxygenMins + 210;
+                                    Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
+                                    break;
+                                case 4:
+                                    Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
+                                    findings = "an engraving";
+                                    Detail(findings, p);
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -1124,7 +1181,7 @@ namespace AdventureGame
                             Console.WriteLine($"A strange creature replys to the knock and you hear the door open.\n");
                             Console.WriteLine($"By some stroke of luck the creature understands english and you have a long conversation.");
                             Console.WriteLine($"You tell the creature that you're using a lot of oxygen and you're trying to find more.");
-                            Console.WriteLine($"The creature offers you an oxygen tank that he has lying around");
+                            Console.WriteLine($"The creature offers you an oxygen tank that he happens to have lying around.");
                             oxygenMins = oxygenMins - 30;
                             oxygenMins = oxygenMins + 210;
                             Console.WriteLine($"Your oxygen has been increased to {oxygenMins}");
@@ -1208,9 +1265,22 @@ namespace AdventureGame
                 Console.ReadLine();
                 
             }
+            int bagChance = rand.Next(5);
             if (detailIn == "a bag")
-            {
-
+            {   
+                switch (bagChance)
+                {
+                    case 0 - 3:
+                        Console.WriteLine("Bag is empty.");
+                        oxygenMins = oxygenMins - 5;
+                        break;
+                    case 4:
+                        Console.WriteLine("The bag contained a book and a key!");
+                        havekey = true;
+                        findings = "a book";
+                        Detail(findings, p);
+                        break;
+                }
 
                 Console.ReadLine();
 
