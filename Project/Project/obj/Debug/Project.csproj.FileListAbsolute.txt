@@ -5,3 +5,10 @@ C:\Users\Dhuga\Project\Project\bin\Debug\Project.exe
 C:\Users\Dhuga\Project\Project\bin\Debug\Project.pdb
 C:\Users\Dhuga\Project\Project\obj\Debug\Project.exe
 C:\Users\Dhuga\Project\Project\obj\Debug\Project.pdb
+H:\FinalProject\Project\Project\bin\Debug\Project.exe.config
+H:\FinalProject\Project\Project\bin\Debug\Project.exe
+H:\FinalProject\Project\Project\bin\Debug\Project.pdb
+H:\FinalProject\Project\Project\obj\Debug\Project.csprojAssemblyReference.cache
+H:\FinalProject\Project\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
+H:\FinalProject\Project\Project\obj\Debug\Project.exe
+H:\FinalProject\Project\Project\obj\Debug\Project.pdb

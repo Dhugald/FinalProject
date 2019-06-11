@@ -341,12 +341,12 @@ namespace AdventureGame
             Console.Title = "Planet Hop";
             string title = @"
             
-            ____  _                  _        _   _                        ___________
+             ____  _                  _        _   _                        ___________
             |  _ \| | __ _ _ __   ___| |_     | | | | ___  _ __           /@@@      @@\       __               _______
             | |_) | |/ _` | '_ \ / _ \ __|    | |_| |/ _ \| '_ \         /         @@@ \         \            /       \
             |  __/| | (_| | | | |  __/ |_     |  _  | (_) | |_) |       |  @@@@     @@  |         \___\    ==|=========|==
             |_|   |_|\__,_|_| |_|\___|\__|    |_| |_|\___/| .__/         \   @@@       /              /       \_______/
-                                                        |_|               \__@@_____@@/
+                                                          |_|             \__@@_____@@/
                                                                                                     
                             ";
             String loading = "";
@@ -454,6 +454,16 @@ namespace AdventureGame
                 case 5:
                     break;
                 case 6:
+                    int blackhole = rand.Next(10);
+                    switch (blackhole)
+                    {
+                        case 6:
+                            Console.WriteLine("Encountered blackhole!");
+                            GameOver();
+                            break;
+
+                            
+                    }
                     break;
                 case 7:
                     break;
@@ -897,7 +907,11 @@ namespace AdventureGame
             Console.WriteLine("You left the ship.\n");
             Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins + " Planet: " + s.location + "    Weather: " + Weather(s.location));
 
-
+            if (oxygenMins < 0)
+            {
+                GameOver();
+            }
+            
             if (s.location.ToLower() != "earth")
             {
                 if (Weather(s.location) == "acid rain")
@@ -1009,7 +1023,7 @@ namespace AdventureGame
 
             double used = 420 - oxygenMins;
             string returnChoice;
-            int chance = rnd.Next(1 - 100);
+            int chance = rnd.Next(10);
             if (used > oxygenMins)
             {
 
@@ -1029,12 +1043,20 @@ namespace AdventureGame
                 {
                     switch (chance)
                     {
-                        case 1 - 90:
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
 
                             Console.WriteLine("You ran out of oxygen");
                             GameOver();
                             break;
-                        case 91 - 100:
+                        case 9:
 
                             Console.WriteLine("By some miricle, you made it back to the ship!");
                             p.inShip = true;
@@ -1046,12 +1068,20 @@ namespace AdventureGame
                 {
                     switch (chance)
                     {
-                        case 1 - 90:
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
 
                             Console.WriteLine("You ran out of oxygen");
                             GameOver();
                             break;
-                        case 91 - 100:
+                        case 9:
 
                             Console.WriteLine("By some miricle, you found enough oxygen to make it back to the ship!");
                             p.inShip = true;
@@ -1067,10 +1097,8 @@ namespace AdventureGame
             string findings;
 
             Random rand = new Random();
-
             Console.WriteLine("Looks like you have come across " + detailIn);
             if (detailIn == "a door")
-
             {
                 int doorChance = rand.Next(10);
                 int roomSpawn = rand.Next(5);
@@ -1082,7 +1110,13 @@ namespace AdventureGame
                 {
                     switch (doorChance)
                     {
-                        case 0 - 6:
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
                             Console.WriteLine("The door is locked. you need a key.\n");
                             oxygenMins = oxygenMins - 10;
                             if (havekey == true)
@@ -1095,7 +1129,9 @@ namespace AdventureGame
                                         findings = "a skeleton";
                                         Detail(findings, p);
                                         break;
-                                    case 1 - 3:
+                                    case 1:
+                                    case 2:
+                                    case 3:
                                         Console.WriteLine($"You find half a tank of oxygen.\n");
                                         oxygenMins = oxygenMins + 105;
                                         Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
@@ -1109,7 +1145,9 @@ namespace AdventureGame
 
                             }
                             break;
-                        case 7 - 9:
+                        case 7:
+                        case 8:
+                        case 9:
                             Console.WriteLine("The door is unlocked, so you enter.\n");
                             oxygenMins = oxygenMins - 30;
                             switch (roomSpawn)
@@ -1119,7 +1157,9 @@ namespace AdventureGame
                                     findings = "a skeleton";
                                     Detail(findings, p);
                                     break;
-                                case 1 - 3:
+                                case 1:
+                                case 2:
+                                case 3:
                                     Console.WriteLine($"You find half a tank of oxygen.\n");
                                     oxygenMins = oxygenMins + 105;
                                     Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
@@ -1137,12 +1177,20 @@ namespace AdventureGame
                 {
                     switch (doorChance)
                     {
-                        case 0 - 6:
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
                             Console.WriteLine("You fail to open the door, you lose 25 health in the process.\n");
                             p.health = p.health - 25;
                             Console.WriteLine($"Your health is now {p.health}\n");
                             break;
-                        case 7 - 9:
+                        case 7:
+                        case 8:
+                        case 9:
                             Console.WriteLine("You manage to force the door open, you enter the room.\n");
                             p.health = p.health - 10;
                             Console.WriteLine($"You use 30 minutes of oxygen trying to force the door.\n");
@@ -1155,7 +1203,9 @@ namespace AdventureGame
                                     findings = "a skeleton";
                                     Detail(findings, p);
                                     break;
-                                case 1 - 3:
+                                case 1:
+                                case 2:
+                                case 3:
                                     Console.WriteLine($"You find half a tank of oxygen.\n");
                                     oxygenMins = oxygenMins + 105;
                                     Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
@@ -1173,7 +1223,15 @@ namespace AdventureGame
                 {
                     switch (doorChance)
                     {
-                        case 0 - 8:
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
                             Console.WriteLine($"There is no reply to the knock./n");
                             break;
                         case 9:
@@ -1237,14 +1295,22 @@ namespace AdventureGame
                 {
                     Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
                     findings = "";
-                    int chance = rand.Next(100);
+                    int chance = rand.Next(10);
                     oxygenMins = oxygenMins - 2;
                     switch (chance)
                     {
-                        case 1 - 80:
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
                             findings = "nothing";
                             break;
-                        case 81 - 90:
+                        case 9:
                             findings = "a bag";
                             break;
 
@@ -1274,7 +1340,10 @@ namespace AdventureGame
                 {
                     switch (bagChance)
                     {
-                        case 0 - 3:
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
                             Console.WriteLine("Bag is empty.");
                             oxygenMins = oxygenMins - 5;
                             break;
