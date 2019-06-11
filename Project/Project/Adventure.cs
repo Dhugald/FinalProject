@@ -1032,7 +1032,7 @@ namespace AdventureGame
                 p.inShip = true;
                 oxygenMins = 420;
             }
-            else
+            else if (used >oxygenMins)
             {
 
                 Console.WriteLine("Not enough reccomended amount of oxygen left to return.");
@@ -1093,8 +1093,18 @@ namespace AdventureGame
 
         public static void Detail(string detailIn, Player p)
         {
-            string choice;
-            string findings;
+            if (oxygenMins < 0)
+            {
+                GameOver();
+            }
+            else if (420 - oxygenMins < oxygenMins)
+            {
+                ShipReturn(p);
+            }
+            else
+            {
+                string choice;
+                string findings;
 
             Random rand = new Random();
             Console.WriteLine("Looks like you have come across " + detailIn);
@@ -1236,55 +1246,55 @@ namespace AdventureGame
                             break;
                         case 9:
 
-                            Console.WriteLine($"A strange creature replys to the knock and you hear the door open.\n");
-                            Console.WriteLine($"By some stroke of luck the creature understands english and you have a long conversation.");
-                            Console.WriteLine($"You tell the creature that you're using a lot of oxygen and you're trying to find more.");
-                            Console.WriteLine($"The creature offers you a half tank of oxygen that he happens to have lying around.");
-                            oxygenMins = oxygenMins - 30;
-                            oxygenMins = oxygenMins + 105;
-                            Console.WriteLine($"Your oxygen has been increased to {oxygenMins}");
-                            break;
+                                Console.WriteLine($"A strange creature replys to the knock and you hear the door open.\n");
+                                Console.WriteLine($"By some stroke of luck the creature understands english and you have a long conversation.");
+                                Console.WriteLine($"You tell the creature that you're using a lot of oxygen and you're trying to find more.");
+                                Console.WriteLine($"The creature offers you a half tank of oxygen that he happens to have lying around.");
+                                oxygenMins = oxygenMins - 30;
+                                oxygenMins = oxygenMins + 105;
+                                Console.WriteLine($"Your oxygen has been increased to {oxygenMins}");
+                                break;
+                        }
                     }
-                }
-                if (choice == "return")
-                {
-                    ShipReturn(p);
-                }
-                Console.ReadLine();
-            }
-            if (detailIn == "a skeleton")
-            {
-                Console.WriteLine("Search - search the skeleton\nRespect - Pay respect and take a moment of silence\n" +
-                    "Bury - Bury the skeleton\nAvoid - Walk away from the skeleton" +
-                                    "Return - Return to the ship");
-                choice = Console.ReadLine().ToLower();
-                if (choice == "return")
-                {
-                    ShipReturn(p);
-                }
-                if (choice == "search")
-                {
-                    findings = "";
-                    int option = rand.Next(1, 3);
-                    switch (option)
+                    if (choice == "return")
                     {
-                        case 1:
-                            findings = "nothing.";
-                            break;
-                        case 2:
-                            findings = "a book";
-                            break;
-                        case 3:
-                            findings = "a bag";
-                            break;
+                        ShipReturn(p);
                     }
-                    oxygenMins = oxygenMins - 5;
-                    Console.WriteLine("You found " + findings + " on the skeleton");
-                    if (findings == "a book" || findings == "a bag")
-                    {
-                        Detail(findings, p);
-                    }
+                    Console.ReadLine();
                 }
+                if (detailIn == "a skeleton")
+                {
+                    Console.WriteLine("Search - search the skeleton\nRespect - Pay respect and take a moment of silence\n" +
+                        "Bury - Bury the skeleton\nAvoid - Walk away from the skeleton" +
+                                        "Return - Return to the ship");
+                    choice = Console.ReadLine().ToLower();
+                    if (choice == "return")
+                    {
+                        ShipReturn(p);
+                    }
+                    if (choice == "search")
+                    {
+                        findings = "";
+                        int option = rand.Next(1, 3);
+                        switch (option)
+                        {
+                            case 1:
+                                findings = "nothing.";
+                                break;
+                            case 2:
+                                findings = "a book";
+                                break;
+                            case 3:
+                                findings = "a bag";
+                                break;
+                        }
+                        oxygenMins = oxygenMins - 5;
+                        Console.WriteLine("You found " + findings + " on the skeleton");
+                        if (findings == "a book" || findings == "a bag")
+                        {
+                            Detail(findings, p);
+                        }
+                    }
 
                 if (choice == "respect")
                 {
@@ -1314,21 +1324,21 @@ namespace AdventureGame
                             findings = "a bag";
                             break;
 
-                    }
-                    Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
-                    oxygenMins = oxygenMins - 60;
-                    if (findings == "a bag")
-                    {
-                        Detail(findings, p);
-                    }
+                        }
+                        Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
+                        oxygenMins = oxygenMins - 60;
+                        if (findings == "a bag")
+                        {
+                            Detail(findings, p);
+                        }
 
-                }
-                if (choice == "avoid")
-                {
-                    Console.WriteLine("You avoided the skeleton.");
-                    oxygenMins = oxygenMins - 1;
-                }
-                Console.ReadLine();
+                    }
+                    if (choice == "avoid")
+                    {
+                        Console.WriteLine("You avoided the skeleton.");
+                        oxygenMins = oxygenMins - 1;
+                    }
+                    Console.ReadLine();
 
             }
             int bagChance = rand.Next(5);
@@ -1355,54 +1365,62 @@ namespace AdventureGame
                             break;
                     }
 
+                    }
+                    else if (choice == "return")
+                    {
+                        ShipReturn(p);
+                    }
+                    if (choice != "return")
+                    {
+                        LocationItem(p);
+                    }
+
+
+                    Console.ReadLine();
+
+
                 }
-                else if (choice == "return")
+                if (detailIn == "an engraving")
                 {
-                    ShipReturn(p);
+                    int chance = rand.Next(1, 3);
+                    string engraving = "";
+                    switch (chance)
+                    {
+                        case 1:
+                            engraving = "WARNING!";
+                            break;
+                        case 2:
+                            engraving = "Welcome.";
+                            break;
+                        case 3:
+                            engraving = "TURN BACK!!!";
+                            break;
+                    }
+                    Console.WriteLine("You come across an engraving. The engraving says: " + engraving);
+                    if (engraving == "WARNING!")
+                    {
+                        Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
+                        oxygenMins = (oxygenMins / 3) * 2;
+                    }
+                    if (engraving == "TURN BACK!!!")
+                    {
+                        Console.WriteLine("The engraving has made you quite paranoid and significantly increased your breathing rate");
+                        oxygenMins = oxygenMins / 2;
+                    }
+                    LocationItem(p);
+
+                    Console.ReadLine();
                 }
-
-
+                if (detailIn == "a book")
+                {
+                    Console.WriteLine("You can read this language, you leave the book.");
+                    oxygenMins = oxygenMins - 2;
+                    LocationItem(p);
+                }
+                Console.WriteLine("You return to the ship");
+                ShipReturn(p);
                 Console.ReadLine();
-
-
             }
-            if (detailIn == "an engraving")
-            {
-                int chance = rand.Next(1, 3);
-                string engraving = "";
-                switch (chance)
-                {
-                    case 1:
-                        engraving = "WARNING!";
-                        break;
-                    case 2:
-                        engraving = "Welcome.";
-                        break;
-                    case 3:
-                        engraving = "TURN BACK!!!";
-                        break;
-                }
-                Console.WriteLine("You come across an engraving. The engraving says: " + engraving);
-                if (engraving == "WARNING!")
-                {
-                    Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
-                    oxygenMins = (oxygenMins / 3) * 2;
-                }
-                if (engraving == "TURN BACK!!!")
-                {
-                    Console.WriteLine("The engraving has made you quite paranoid and significantly increased your breathing rate");
-                    oxygenMins = oxygenMins / 2;
-                }
-
-                Console.ReadLine();
-            }
-            if (detailIn == "a book")
-            {
-
-            }
-            Console.WriteLine("You return to the ship");
-            ShipReturn(p);
-            Console.ReadLine();
         }
 
         public static void LocationItem(Player p)
