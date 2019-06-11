@@ -1197,9 +1197,10 @@
                                 }
                                
                             }
+                int bagChance = rand.Next(5);
                             if (detailIn == "a bag")
                             {
-                                     
+                               
 
                             }
                             if (detailIn == "an engraving")
