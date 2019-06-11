@@ -1117,6 +1117,7 @@ namespace AdventureGame
                                         "Return - Return to the ship");
                     choice = Console.ReadLine().ToLower();
                     if (choice == "open")
+
                     {
                         switch (doorChance)
                         {
@@ -1340,31 +1341,30 @@ namespace AdventureGame
                     }
                     Console.ReadLine();
 
-            }
-            int bagChance = rand.Next(5);
-            if (detailIn == "a bag")
-            {
-                Console.WriteLine("Search - search the bag\nReturn - Return to the ship");
-                choice = Console.ReadLine().ToLower();
-                if (choice == "search")
 
-                {
-                    switch (bagChance)
+                    int bagChance = rand.Next(5);
+                    if (detailIn == "a bag")
                     {
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                            Console.WriteLine("Bag is empty.");
-                            oxygenMins = oxygenMins - 5;
-                            break;
-                        case 4:
-                            Console.WriteLine("The bag contained a book and a key!");
-                            havekey = true;
-                            findings = "a book";
-                            Detail(findings, p);
-                            break;
-                    }
+                        Console.WriteLine("Search - search the bag\nReturn - Return to the ship");
+                        choice = Console.ReadLine().ToLower();
+                        if (choice == "search")
+                        {
+                            switch (bagChance)
+                            {
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    Console.WriteLine("Bag is empty.");
+                                    oxygenMins = oxygenMins - 5;
+                                    break;
+                                case 4:
+                                    Console.WriteLine("The bag contained a book and a key!");
+                                    havekey = true;
+                                    findings = "a book";
+                                    Detail(findings, p);
+                                    break;
+                            }
 
                         }
                         else if (choice == "return")
