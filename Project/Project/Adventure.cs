@@ -1347,6 +1347,7 @@ namespace AdventureGame
                 Console.WriteLine("Search - search the bag\nReturn - Return to the ship");
                 choice = Console.ReadLine().ToLower();
                 if (choice == "search")
+
                 {
                     switch (bagChance)
                     {
