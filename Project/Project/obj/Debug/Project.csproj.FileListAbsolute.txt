@@ -1,0 +1,7 @@
+C:\Users\Dhuga\Project\Project\obj\Debug\Project.csprojAssemblyReference.cache
+C:\Users\Dhuga\Project\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
+C:\Users\Dhuga\Project\Project\bin\Debug\Project.exe.config
+C:\Users\Dhuga\Project\Project\bin\Debug\Project.exe
+C:\Users\Dhuga\Project\Project\bin\Debug\Project.pdb
+C:\Users\Dhuga\Project\Project\obj\Debug\Project.exe
+C:\Users\Dhuga\Project\Project\obj\Debug\Project.pdb
