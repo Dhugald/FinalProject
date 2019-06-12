@@ -1421,10 +1421,10 @@ namespace AdventureGame
                     {
                         Console.WriteLine("You can read this language, you leave the book.");
                         oxygenMins = oxygenMins - 2;
-                        LocationItem(p);
+                        LocationItem(p,s,planets);
                     }
                     Console.WriteLine("You return to the ship");
-                    ShipReturn(p);
+                    ShipReturn(p,s,planets);
                     Console.ReadLine();
                 }
             
