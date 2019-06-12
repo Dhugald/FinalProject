@@ -954,7 +954,7 @@ namespace AdventureGame
                     landscape = "building";
                     break;
                 case 2:
-                    landscape = "forrest";
+                    landscape = "forest";
                     break;
                 case 3:
                     landscape = "cave";
@@ -1452,7 +1452,7 @@ namespace AdventureGame
             {
                 detailSwitch = rnd.Next(2, 5);
             }
-            if (landscape == "forrest")
+            if (landscape == "forest")
             {
                 detailSwitch = rnd.Next(2, 5);
             }
