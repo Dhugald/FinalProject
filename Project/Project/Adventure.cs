@@ -954,7 +954,7 @@ namespace AdventureGame
                     landscape = "building";
                     break;
                 case 2:
-                    landscape = "forrest";
+                    landscape = "forest";
                     break;
                 case 3:
                     landscape = "cave";
@@ -1415,18 +1415,18 @@ namespace AdventureGame
                     }
                     LocationItem(p, s, planets);
 
+                        Console.ReadLine();
+                    }
+                    if (detailIn == "a book")
+                    {
+                        Console.WriteLine("You can read this language, you leave the book.");
+                        oxygenMins = oxygenMins - 2;
+                        LocationItem(p,s,planets);
+                    }
+                    Console.WriteLine("You return to the ship");
+                    ShipReturn(p,s,planets);
                     Console.ReadLine();
                 }
-                if (detailIn == "a book")
-                {
-                    Console.WriteLine("You can read this language, you leave the book.");
-                    oxygenMins = oxygenMins - 2;
-                    LocationItem(p, s, planets);
-                }
-                Console.WriteLine("You return to the ship");
-                ShipReturn(p, s, planets);
-                Console.ReadLine();
-            }
             
         }
 
@@ -1452,7 +1452,7 @@ namespace AdventureGame
             {
                 detailSwitch = rnd.Next(2, 5);
             }
-            if (landscape == "forrest")
+            if (landscape == "forest")
             {
                 detailSwitch = rnd.Next(2, 5);
             }
@@ -1495,7 +1495,7 @@ namespace AdventureGame
         {
             String gameOverLogo = @"
             
-          ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███  
+         ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███  
          ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀    ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒
         ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███      ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒
         ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄    ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄  
