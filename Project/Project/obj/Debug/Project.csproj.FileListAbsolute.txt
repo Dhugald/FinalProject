@@ -12,3 +12,10 @@ H:\FinalProject\Project\Project\obj\Debug\Project.csprojAssemblyReference.cache
 H:\FinalProject\Project\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
 H:\FinalProject\Project\Project\obj\Debug\Project.exe
 H:\FinalProject\Project\Project\obj\Debug\Project.pdb
+H:\Final Project\FinalProject\Project\Project\bin\Debug\Project.exe.config
+H:\Final Project\FinalProject\Project\Project\bin\Debug\Project.exe
+H:\Final Project\FinalProject\Project\Project\bin\Debug\Project.pdb
+H:\Final Project\FinalProject\Project\Project\obj\Debug\Project.csprojAssemblyReference.cache
+H:\Final Project\FinalProject\Project\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
+H:\Final Project\FinalProject\Project\Project\obj\Debug\Project.exe
+H:\Final Project\FinalProject\Project\Project\obj\Debug\Project.pdb
