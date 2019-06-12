@@ -661,7 +661,8 @@ namespace AdventureGame
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Fly".PadRight(7) + "- To fly to a planet");
             Console.WriteLine("Exit".PadRight(7) + "- To exit ship");
-            if (!p.inShip)
+            
+            if (p.inShip == false)
             {
                 Console.WriteLine("Enter".PadRight(7) + "- To enter ship\n");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -669,7 +670,7 @@ namespace AdventureGame
         }
         public static void QuestCaller(Planet[] planets, Ship s, Player p)
         {
-            if (!p.inShip)
+            if (p.inShip == false)
             {
                 switch (s.location)
                 {
@@ -899,7 +900,7 @@ namespace AdventureGame
             double oxygenMins = health * 4.2;
             return oxygenMins;
         }**/
-        public static void Landscape(Ship s, Player p)
+        public static void Landscape(Ship s, Player p, Planet[] planets)
         {
 
             Console.WriteLine("You left the ship.\n");
@@ -997,7 +998,7 @@ namespace AdventureGame
                 Console.WriteLine("You arrived at the " + landscape);
                 Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins +
                     " Planet: " + s.location + "    Weather: " + Weather(s.location));
-                LocationItem(p);
+                LocationItem(p, s, planets);
             }
 
         }
@@ -1014,23 +1015,26 @@ namespace AdventureGame
 
         }
 
-        public static void ShipReturn(Player p)
+        public static void ShipReturn(Player p, Ship s, Planet[] planets)
         {
 
             Random rnd = new Random();
 
-            double used = 420 - oxygenMins;
+            double used = 420 - oxygenMins; //returns how much weve used so far
             string returnChoice;
             int chance = rnd.Next(10);
-            if (used > oxygenMins)
+            if (used < oxygenMins) // used so far is smaller than what we have left
             {
 
-                oxygenMins = oxygenMins - used;
+                oxygenMins = oxygenMins - used;// for the return trip
                 Console.WriteLine("You made it outside your ship with " + oxygenMins + " mins left!");
                 p.inShip = true;
-                oxygenMins = 420;
+                CmdList(p);
+                string input = Console.ReadLine().ToLower();
+                Options(input, s, p, planets);
+
             }
-            else if (used >oxygenMins)
+            else if (used > oxygenMins)
             {
 
                 Console.WriteLine("Not enough reccomended amount of oxygen left to return.");
@@ -1089,22 +1093,23 @@ namespace AdventureGame
             }
         }
 
-        public static void Detail(string detailIn, Player p)
+        public static void Detail(string detailIn, Player p, Ship s, Planet[] planets)
         {
-
+            
             if (oxygenMins <= 0)
             {
 
                 GameOver();
             }
+            /*
             else if (420 - oxygenMins < oxygenMins)
             {
                 ShipReturn(p);
-            }
-            
-            
+            }*/
+
                 string choice;
                 string findings;
+            Console.ReadLine();
 
                 Random rand = new Random();
                 Console.WriteLine("Looks like you have come across " + detailIn);
@@ -1138,7 +1143,7 @@ namespace AdventureGame
                                         case 0:
                                             Console.WriteLine($"In the room is a skeleton!\n");
                                             findings = "a skeleton";
-                                            Detail(findings, p);
+                                            Detail(findings, p, s, planets);
                                             break;
                                         case 1:
                                         case 2:
@@ -1150,7 +1155,7 @@ namespace AdventureGame
                                         case 4:
                                             Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
                                             findings = "an engraving";
-                                            Detail(findings, p);
+                                            Detail(findings, p, s, planets);
                                             break;
                                     }
 
@@ -1166,7 +1171,7 @@ namespace AdventureGame
                                     case 0:
                                         Console.WriteLine($"In the room is a skeleton!\n");
                                         findings = "a skeleton";
-                                        Detail(findings, p);
+                                        Detail(findings, p, s, planets);
                                         break;
                                     case 1:
                                     case 2:
@@ -1178,7 +1183,7 @@ namespace AdventureGame
                                     case 4:
                                         Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
                                         findings = "an engraving";
-                                        Detail(findings, p);
+                                        Detail(findings, p, s, planets);
                                         break;
                                 }
                                 break;
@@ -1212,7 +1217,7 @@ namespace AdventureGame
                                     case 0:
                                         Console.WriteLine($"In the room is a skeleton!\n");
                                         findings = "a skeleton";
-                                        Detail(findings, p);
+                                        Detail(findings, p, s, planets);
                                         break;
                                     case 1:
                                     case 2:
@@ -1224,7 +1229,7 @@ namespace AdventureGame
                                     case 4:
                                         Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
                                         findings = "an engraving";
-                                        Detail(findings, p);
+                                        Detail(findings, p, s, planets);
                                         break;
                                 }
                                 break;
@@ -1259,156 +1264,156 @@ namespace AdventureGame
                     }
                     if (choice == "return")
                     {
-                        ShipReturn(p);
+                        ShipReturn(p, s, planets);
                     }
                     Console.ReadLine();
                 }
-                if (detailIn == "a skeleton")
+            if (detailIn == "a skeleton")
+            {
+                Console.WriteLine("Search - search the skeleton\nRespect - Pay respect and take a moment of silence\n" +
+                    "Bury - Bury the skeleton\nAvoid - Walk away from the skeleton" +
+                                    "Return - Return to the ship");
+                choice = Console.ReadLine().ToLower();
+                if (choice == "return")
                 {
-                    Console.WriteLine("Search - search the skeleton\nRespect - Pay respect and take a moment of silence\n" +
-                        "Bury - Bury the skeleton\nAvoid - Walk away from the skeleton" +
-                                        "Return - Return to the ship");
-                    choice = Console.ReadLine().ToLower();
-                    if (choice == "return")
+                    ShipReturn(p, s, planets);
+                }
+                if (choice == "search")
+                {
+                    findings = "";
+                    int option = rand.Next(1, 3);
+                    switch (option)
                     {
-                        ShipReturn(p);
+                        case 1:
+                            findings = "nothing.";
+                            break;
+                        case 2:
+                            findings = "a book";
+                            break;
+                        case 3:
+                            findings = "a bag";
+                            break;
                     }
-                    if (choice == "search")
+                    oxygenMins = oxygenMins - 5;
+                    Console.WriteLine("You found " + findings + " on the skeleton");
+                    if (findings == "a book" || findings == "a bag")
                     {
-                        findings = "";
-                        int option = rand.Next(1, 3);
-                        switch (option)
-                        {
-                            case 1:
-                                findings = "nothing.";
-                                break;
-                            case 2:
-                                findings = "a book";
-                                break;
-                            case 3:
-                                findings = "a bag";
-                                break;
-                        }
-                        oxygenMins = oxygenMins - 5;
-                        Console.WriteLine("You found " + findings + " on the skeleton");
-                        if (findings == "a book" || findings == "a bag")
-                        {
-                            Detail(findings, p);
-                        }
+                        Detail(findings, p, s, planets);
+                    }
+                }
+
+                if (choice == "respect")
+                {
+                    Console.WriteLine("You take a moment of silence and respect the fallen.");
+                    oxygenMins = oxygenMins - 2;
+                }
+                if (choice == "bury")
+                {
+                    Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
+                    findings = "";
+                    int chance = rand.Next(10);
+                    oxygenMins = oxygenMins - 2;
+                    switch (chance)
+                    {
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                            findings = "nothing";
+                            break;
+                        case 9:
+                            findings = "a bag";
+                            break;
+
+                    }
+                    Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
+                    oxygenMins = oxygenMins - 60;
+                    if (findings == "a bag")
+                    {
+                        Detail(findings, p, s, planets);
                     }
 
-                    if (choice == "respect")
+                }
+                if (choice == "avoid")
+                {
+                    Console.WriteLine("You avoided the skeleton.");
+                    oxygenMins = oxygenMins - 1;
+                }
+                Console.ReadLine();
+
+
+                int bagChance = rand.Next(5);
+                if (detailIn == "a bag")
+                {
+                    Console.WriteLine("Search - search the bag\nReturn - Return to the ship");
+                    choice = Console.ReadLine().ToLower();
+                    if (choice == "search")
                     {
-                        Console.WriteLine("You take a moment of silence and respect the fallen.");
-                        oxygenMins = oxygenMins - 2;
-                    }
-                    if (choice == "bury")
-                    {
-                        Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
-                        findings = "";
-                        int chance = rand.Next(10);
-                        oxygenMins = oxygenMins - 2;
-                        switch (chance)
+                        switch (bagChance)
                         {
                             case 0:
                             case 1:
                             case 2:
                             case 3:
+                                Console.WriteLine("Bag is empty.");
+                                oxygenMins = oxygenMins - 5;
+                                break;
                             case 4:
-                            case 5:
-                            case 6:
-                            case 7:
-                            case 8:
-                                findings = "nothing";
+                                Console.WriteLine("The bag contained a book and a key!");
+                                havekey = true;
+                                findings = "a book";
+                                Detail(findings, p, s, planets);
                                 break;
-                            case 9:
-                                findings = "a bag";
-                                break;
-
-                        }
-                        Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
-                        oxygenMins = oxygenMins - 60;
-                        if (findings == "a bag")
-                        {
-                            Detail(findings, p);
                         }
 
                     }
-                    if (choice == "avoid")
+                    else if (choice == "return")
                     {
-                        Console.WriteLine("You avoided the skeleton.");
-                        oxygenMins = oxygenMins - 1;
+                        ShipReturn(p, s, planets);
                     }
+                    if (choice != "return")
+                    {
+                        LocationItem(p, s, planets);
+                    }
+
+
                     Console.ReadLine();
 
 
-                    int bagChance = rand.Next(5);
-                    if (detailIn == "a bag")
+                }
+                if (detailIn == "an engraving")
+                {
+                    int chance = rand.Next(1, 3);
+                    string engraving = "";
+                    switch (chance)
                     {
-                        Console.WriteLine("Search - search the bag\nReturn - Return to the ship");
-                        choice = Console.ReadLine().ToLower();
-                        if (choice == "search")
-                        {
-                            switch (bagChance)
-                            {
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    Console.WriteLine("Bag is empty.");
-                                    oxygenMins = oxygenMins - 5;
-                                    break;
-                                case 4:
-                                    Console.WriteLine("The bag contained a book and a key!");
-                                    havekey = true;
-                                    findings = "a book";
-                                    Detail(findings, p);
-                                    break;
-                            }
-
-                        }
-                        else if (choice == "return")
-                        {
-                            ShipReturn(p);
-                        }
-                        if (choice != "return")
-                        {
-                            LocationItem(p);
-                        }
-
-
-                        Console.ReadLine();
-
-
+                        case 1:
+                            engraving = "WARNING!";
+                            break;
+                        case 2:
+                            engraving = "Welcome.";
+                            break;
+                        case 3:
+                            engraving = "TURN BACK!!!";
+                            break;
                     }
-                    if (detailIn == "an engraving")
+                    Console.WriteLine("You come across an engraving. The engraving says: " + engraving);
+                    if (engraving == "WARNING!")
                     {
-                        int chance = rand.Next(1, 3);
-                        string engraving = "";
-                        switch (chance)
-                        {
-                            case 1:
-                                engraving = "WARNING!";
-                                break;
-                            case 2:
-                                engraving = "Welcome.";
-                                break;
-                            case 3:
-                                engraving = "TURN BACK!!!";
-                                break;
-                        }
-                        Console.WriteLine("You come across an engraving. The engraving says: " + engraving);
-                        if (engraving == "WARNING!")
-                        {
-                            Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
-                            oxygenMins = (oxygenMins / 3) * 2;
-                        }
-                        if (engraving == "TURN BACK!!!")
-                        {
-                            Console.WriteLine("The engraving has made you quite paranoid and significantly increased your breathing rate");
-                            oxygenMins = oxygenMins / 2;
-                        }
-                        LocationItem(p);
+                        Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
+                        oxygenMins = (oxygenMins / 3) * 2;
+                    }
+                    if (engraving == "TURN BACK!!!")
+                    {
+                        Console.WriteLine("The engraving has made you quite paranoid and significantly increased your breathing rate");
+                        oxygenMins = oxygenMins / 2;
+                    }
+                    LocationItem(p, s, planets);
 
                         Console.ReadLine();
                     }
@@ -1425,7 +1430,7 @@ namespace AdventureGame
             
         }
 
-        public static void LocationItem(Player p)
+        public static void LocationItem(Player p, Ship s, Planet[] planets)
         {
 
 
@@ -1460,7 +1465,7 @@ namespace AdventureGame
                 detailSwitch = rnd.Next(1, 5);
             }
 
-            string detail = "";
+            string detail= "";
 
             switch (detailSwitch)
             {
@@ -1480,7 +1485,7 @@ namespace AdventureGame
                     detail = "a book";
                     break;
             }
-            Detail(detail, p);
+            Detail(detail, p, s, planets);
 
 
         }
@@ -1543,32 +1548,38 @@ namespace AdventureGame
                 CmdList(p);
 
                 string input = Console.ReadLine().ToLower();
+                Options(input, s, p, planets);
 
-                if (input == "fly")
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write("Enter planet to fly to: ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    input = Console.ReadLine().ToLower();
-                    Travel(ref s, p, input, planets);
 
-                }
-                else if (input == "exit")
-                {
-                    p.inShip = false;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You exited the ship");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Landscape(s, p);
-                }
-                else if (input == "enter")
-                {
-                    p.inShip = true;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You entered the ship");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
 
+            }
+
+        }
+        public static void Options(string input, Ship s, Player p, Planet[] planets)
+        {
+            if (input == "fly")
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("Enter planet to fly to: ");
+                Console.ForegroundColor = ConsoleColor.White;
+                input = Console.ReadLine().ToLower();
+                Travel(ref s, p, input, planets);
+
+            }
+            else if (input == "exit")
+            {
+                p.inShip = false;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("You exited the ship");
+                Console.ForegroundColor = ConsoleColor.White;
+                Landscape(s, p, planets);
+            }
+            else if (input == "enter")
+            {
+                p.inShip = true;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You entered the ship");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
     }
