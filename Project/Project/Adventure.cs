@@ -1415,18 +1415,18 @@ namespace AdventureGame
                     }
                     LocationItem(p, s, planets);
 
+                        Console.ReadLine();
+                    }
+                    if (detailIn == "a book")
+                    {
+                        Console.WriteLine("You can read this language, you leave the book.");
+                        oxygenMins = oxygenMins - 2;
+                        LocationItem(p);
+                    }
+                    Console.WriteLine("You return to the ship");
+                    ShipReturn(p);
                     Console.ReadLine();
                 }
-                if (detailIn == "a book")
-                {
-                    Console.WriteLine("You can read this language, you leave the book.");
-                    oxygenMins = oxygenMins - 2;
-                    LocationItem(p, s, planets);
-                }
-                Console.WriteLine("You return to the ship");
-                ShipReturn(p, s, planets);
-                Console.ReadLine();
-            }
             
         }
 
@@ -1495,7 +1495,7 @@ namespace AdventureGame
         {
             String gameOverLogo = @"
             
-          ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███  
+         ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███  
          ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀    ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒
         ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███      ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒
         ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄    ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄  
