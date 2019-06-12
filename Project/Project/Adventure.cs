@@ -598,6 +598,7 @@ namespace AdventureGame
                                 break;
                             case "mars":
                                 s.location = "mars";
+                                Console.Write(s.location);
                                 Console.WriteLine("You successfully arrived to mars.\n");
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.WriteLine("The weather is currently " + Weather(s.location) + " on " + (s.location));
@@ -699,7 +700,7 @@ namespace AdventureGame
 
         }
 
-        public static string Weather(String planetName)
+        public static string Weather(string planetName)
         {
 
             Random rnd = new Random();
@@ -903,6 +904,7 @@ namespace AdventureGame
         public static void Landscape(Ship s, Player p, Planet[] planets)
         {
 
+            Console.Write(s.location);
             Console.WriteLine("You left the ship.\n");
             Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins + " Planet: " + s.location + "    Weather: " + Weather(s.location));
 
@@ -1031,7 +1033,7 @@ namespace AdventureGame
                 p.inShip = true;
                 CmdList(p);
                 string input = Console.ReadLine().ToLower();
-                Options(input, s, p, planets);
+                Options(input, ref s, p, planets);
 
             }
             else if (used > oxygenMins)
@@ -1335,6 +1337,7 @@ namespace AdventureGame
                     oxygenMins = oxygenMins - 60;
                     if (findings == "a bag")
                     {
+
                         Detail(findings, p, s, planets);
                     }
 
@@ -1532,11 +1535,11 @@ namespace AdventureGame
             Adventure.oxygenMins = health * 4.2;
 
 
-            Game(inventory, planets, s, p);
+            Game(inventory, planets, ref s, p);
         }
 
 
-        static void Game(string[] inventory, Planet[] planets, Ship s, Player p)
+        static void Game(string[] inventory, Planet[] planets, ref Ship s, Player p)
         {
             GameInitialization(ref p, ref s, planets);
             StartUp();
@@ -1548,14 +1551,14 @@ namespace AdventureGame
                 CmdList(p);
 
                 string input = Console.ReadLine().ToLower();
-                Options(input, s, p, planets);
+                Options(input, ref s, p, planets);
 
 
 
             }
 
         }
-        public static void Options(string input, Ship s, Player p, Planet[] planets)
+        public static void Options(string input, ref Ship s, Player p, Planet[] planets)
         {
             if (input == "fly")
             {
@@ -1564,7 +1567,6 @@ namespace AdventureGame
                 Console.ForegroundColor = ConsoleColor.White;
                 input = Console.ReadLine().ToLower();
                 Travel(ref s, p, input, planets);
-
             }
             else if (input == "exit")
             {
@@ -1573,6 +1575,7 @@ namespace AdventureGame
                 Console.WriteLine("You exited the ship");
                 Console.ForegroundColor = ConsoleColor.White;
                 Landscape(s, p, planets);
+                
             }
             else if (input == "enter")
             {
