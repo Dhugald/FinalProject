@@ -669,6 +669,7 @@ namespace AdventureGame
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
+        /**
         public static void QuestCaller(Planet[] planets, Ship s, Player p)
         {
             if (p.inShip == false)
@@ -698,7 +699,7 @@ namespace AdventureGame
                 }
             }
 
-        }
+        }**/
 
         public static string Weather(string planetName)
         {
@@ -904,9 +905,9 @@ namespace AdventureGame
         public static void Landscape(Ship s, Player p, Planet[] planets)
         {
 
-            Console.Write(s.location);
-            Console.WriteLine("You left the ship.\n");
-            Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins + " Planet: " + s.location + "    Weather: " + Weather(s.location));
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("Health: " + p.health + "         Mins of Oxygen: " + oxygenMins + "          Planet: " + s.location + "          Weather: " + Weather(s.location));
+            Console.ForegroundColor = ConsoleColor.White;
 
             if (oxygenMins < 0)
             {
@@ -976,16 +977,21 @@ namespace AdventureGame
             }
 
             Console.WriteLine("You see that " + landscapeDistance + " metres away is a " + landscape);
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("What do you do?");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Approach - Approach the " + landscape);
             Console.WriteLine("Return - Return to the ship");
+            Console.ForegroundColor = ConsoleColor.White;
             string input = Console.ReadLine().ToLower();
             if (input == "return")
             {
                 p.inShip = true;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("You returned to your ship.");
                 p.health = 100;
                 Console.WriteLine("Health returned to 100%");
+                Console.ForegroundColor = ConsoleColor.White;
                 CmdList(p);
             }
             if (input == "approach")
@@ -998,8 +1004,10 @@ namespace AdventureGame
 
                 oxygenMins = (oxygenMins - (landscapeDistance / metresMin));
                 Console.WriteLine("You arrived at the " + landscape);
-                Console.WriteLine("Health: " + p.health + "   Mins of Oxygen: " + oxygenMins +
-                    " Planet: " + s.location + "    Weather: " + Weather(s.location));
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Health: " + p.health + "         Mins of Oxygen: " + oxygenMins +
+                    "           Planet: " + s.location + "          Weather: " + Weather(s.location));
+                Console.ForegroundColor = ConsoleColor.White;
                 LocationItem(p, s, planets);
             }
 
@@ -1007,14 +1015,15 @@ namespace AdventureGame
 
         public static void Earth(Player p, Ship s)
         {
-            Console.WriteLine($"You arrive at Mission control, they repair and refuel the ship.\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+               Console.WriteLine($"You arrive at Mission control, they repair and refuel the ship.\n");
             s.health = 100;
             s.fuel = 100;
             oxygenMins = 420;
             Console.WriteLine($"Ship health is at {s.health}%  and ship fuel is at {s.fuel}%\n");
             Console.WriteLine($"You also find two new oxygen tanks, so you swap yours out.\n");
             Console.WriteLine($"Oxygen now at {oxygenMins}");
-
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public static void ShipReturn(Player p, Ship s, Planet[] planets)
@@ -1029,7 +1038,9 @@ namespace AdventureGame
             {
 
                 oxygenMins = oxygenMins - used;// for the return trip
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("You made it outside your ship with " + oxygenMins + " mins left!");
+                Console.ForegroundColor = ConsoleColor.White;
                 p.inShip = true;
                 CmdList(p);
                 string input = Console.ReadLine().ToLower();
@@ -1038,10 +1049,13 @@ namespace AdventureGame
             }
             else if (used > oxygenMins)
             {
-
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Not enough reccomended amount of oxygen left to return.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("What do you do?");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Return - Risk it, and return to ship\nLook - look for oxygen supply nearby");
+                Console.ForegroundColor = ConsoleColor.White;
                 returnChoice = Console.ReadLine().ToLower();
                 if (returnChoice == "return")
                 {
@@ -1056,13 +1070,15 @@ namespace AdventureGame
                         case 6:
                         case 7:
                         case 8:
-
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("You ran out of oxygen");
                             GameOver();
+                            Console.ForegroundColor = ConsoleColor.White;
                             break;
                         case 9:
-
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("By some miricle, you made it back to the ship!");
+                            Console.ForegroundColor = ConsoleColor.White;
                             p.inShip = true;
                             break;
                     }
@@ -1081,13 +1097,15 @@ namespace AdventureGame
                         case 6:
                         case 7:
                         case 8:
-
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("You ran out of oxygen");
                             GameOver();
+                            Console.ForegroundColor = ConsoleColor.White;
                             break;
                         case 9:
-
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("By some miricle, you found enough oxygen to make it back to the ship!");
+                            Console.ForegroundColor = ConsoleColor.White;
                             p.inShip = true;
                             break;
                     }
@@ -1119,9 +1137,12 @@ namespace AdventureGame
                 {
                     int doorChance = rand.Next(10);
                     int roomSpawn = rand.Next(5);
+                Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("What do you do?");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Open - Open the door\nForce - Force the door to open\nKnock - Knock on the door\n" +
                                         "Return - Return to the ship");
+                Console.ForegroundColor = ConsoleColor.White;
                     choice = Console.ReadLine().ToLower();
                     if (choice == "open")
 
@@ -1135,27 +1156,37 @@ namespace AdventureGame
                             case 4:
                             case 5:
                             case 6:
-                                Console.WriteLine("The door is locked. you need a key.\n");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("The door is locked. you need a key.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
                                 oxygenMins = oxygenMins - 10;
                                 if (havekey == true)
                                 {
+                                Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Lucky for you, you already found the key!\n");
+                                Console.ForegroundColor = ConsoleColor.White;
                                     switch (roomSpawn)
                                     {
                                         case 0:
-                                            Console.WriteLine($"In the room is a skeleton!\n");
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                     Console.WriteLine($"In the room is a skeleton!\n");
+                                        Console.ForegroundColor = ConsoleColor.White;
                                             findings = "a skeleton";
                                             Detail(findings, p, s, planets);
                                             break;
                                         case 1:
                                         case 2:
                                         case 3:
+                                        Console.ForegroundColor = ConsoleColor.Green;
                                             Console.WriteLine($"You find half a tank of oxygen.\n");
                                             oxygenMins = oxygenMins + 105;
                                             Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
+                                        Console.ForegroundColor = ConsoleColor.White;
                                             break;
                                         case 4:
+                                        Console.ForegroundColor = ConsoleColor.Green;
                                             Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
+                                        Console.ForegroundColor = ConsoleColor.White;
                                             findings = "an engraving";
                                             Detail(findings, p, s, planets);
                                             break;
@@ -1166,24 +1197,32 @@ namespace AdventureGame
                             case 7:
                             case 8:
                             case 9:
+                            Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("The door is unlocked, so you enter.\n");
+                            Console.ForegroundColor = ConsoleColor.White;
                                 oxygenMins = oxygenMins - 30;
                                 switch (roomSpawn)
                                 {
                                     case 0:
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"In the room is a skeleton!\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                         findings = "a skeleton";
                                         Detail(findings, p, s, planets);
                                         break;
                                     case 1:
                                     case 2:
                                     case 3:
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"You find half a tank of oxygen.\n");
                                         oxygenMins = oxygenMins + 105;
                                         Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                         break;
                                     case 4:
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                         findings = "an engraving";
                                         Detail(findings, p, s, planets);
                                         break;
@@ -1202,34 +1241,45 @@ namespace AdventureGame
                             case 4:
                             case 5:
                             case 6:
+                            Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You fail to open the door, you lose 25 health in the process.\n");
                                 p.health = p.health - 25;
                                 Console.WriteLine($"Your health is now {p.health}\n");
+                            Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             case 7:
                             case 8:
                             case 9:
+                            Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("You manage to force the door open, you enter the room.\n");
                                 p.health = p.health - 10;
+                            Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine($"You use 30 minutes of oxygen trying to force the door.\n");
                                 oxygenMins = oxygenMins - 30;
                                 Console.WriteLine($"You lose some health trying. Health is now {p.health}\n.");
+                            Console.ForegroundColor = ConsoleColor.White;
                                 switch (roomSpawn)
                                 {
                                     case 0:
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"In the room is a skeleton!\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                         findings = "a skeleton";
                                         Detail(findings, p, s, planets);
                                         break;
                                     case 1:
                                     case 2:
                                     case 3:
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"You find half a tank of oxygen.\n");
                                         oxygenMins = oxygenMins + 105;
                                         Console.WriteLine($"You open the door and search the room,  you find , oxygen now at {oxygenMins} minutes of oxygen.\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                         break;
                                     case 4:
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"The room is empty, besides an engraving on the wall.\n");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                         findings = "an engraving";
                                         Detail(findings, p, s, planets);
                                         break;
@@ -1250,17 +1300,21 @@ namespace AdventureGame
                             case 6:
                             case 7:
                             case 8:
+                            Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine($"There is no reply to the knock./n");
+                            Console.ForegroundColor = ConsoleColor.White;
                                 break;
                             case 9:
-
+                            Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine($"A strange creature replys to the knock and you hear the door open.\n");
+                            Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine($"By some stroke of luck the creature understands english and you have a long conversation.");
                                 Console.WriteLine($"You tell the creature that you're using a lot of oxygen and you're trying to find more.");
                                 Console.WriteLine($"The creature offers you a half tank of oxygen that he happens to have lying around.");
                                 oxygenMins = oxygenMins - 30;
                                 oxygenMins = oxygenMins + 105;
                                 Console.WriteLine($"Your oxygen has been increased to {oxygenMins}");
+                            Console.ForegroundColor = ConsoleColor.White;
                                 break;
                         }
                     }
@@ -1272,9 +1326,11 @@ namespace AdventureGame
                 }
             if (detailIn == "a skeleton")
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Search - search the skeleton\nRespect - Pay respect and take a moment of silence\n" +
                     "Bury - Bury the skeleton\nAvoid - Walk away from the skeleton" +
                                     "Return - Return to the ship");
+                Console.ForegroundColor = ConsoleColor.White;
                 choice = Console.ReadLine().ToLower();
                 if (choice == "return")
                 {
@@ -1297,7 +1353,9 @@ namespace AdventureGame
                             break;
                     }
                     oxygenMins = oxygenMins - 5;
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You found " + findings + " on the skeleton");
+                    Console.ForegroundColor = ConsoleColor.White;
                     if (findings == "a book" || findings == "a bag")
                     {
                         Detail(findings, p, s, planets);
@@ -1306,12 +1364,16 @@ namespace AdventureGame
 
                 if (choice == "respect")
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You take a moment of silence and respect the fallen.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     oxygenMins = oxygenMins - 2;
                 }
                 if (choice == "bury")
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You decide to bury the skeleton so it can move on in the after life.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     findings = "";
                     int chance = rand.Next(10);
                     oxygenMins = oxygenMins - 2;
@@ -1333,7 +1395,9 @@ namespace AdventureGame
                             break;
 
                     }
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You found " + findings + " while digging a grave.\nThe skeleton is now burried.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     oxygenMins = oxygenMins - 60;
                     if (findings == "a bag")
                     {
@@ -1344,7 +1408,9 @@ namespace AdventureGame
                 }
                 if (choice == "avoid")
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You avoided the skeleton.");
+                    Console.ForegroundColor = ConsoleColor.White;
                     oxygenMins = oxygenMins - 1;
                 }
                 Console.ReadLine();
@@ -1353,7 +1419,9 @@ namespace AdventureGame
                 int bagChance = rand.Next(5);
                 if (detailIn == "a bag")
                 {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Search - search the bag\nReturn - Return to the ship");
+                    Console.ForegroundColor = ConsoleColor.White;
                     choice = Console.ReadLine().ToLower();
                     if (choice == "search")
                     {
@@ -1363,11 +1431,15 @@ namespace AdventureGame
                             case 1:
                             case 2:
                             case 3:
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Bag is empty.");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 oxygenMins = oxygenMins - 5;
                                 break;
                             case 4:
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine("The bag contained a book and a key!");
+                                Console.ForegroundColor = ConsoleColor.White;
                                 havekey = true;
                                 findings = "a book";
                                 Detail(findings, p, s, planets);
@@ -1396,37 +1468,51 @@ namespace AdventureGame
                     switch (chance)
                     {
                         case 1:
+                            Console.ForegroundColor = ConsoleColor.Red;
                             engraving = "WARNING!";
+                            Console.ForegroundColor = ConsoleColor.White;
                             break;
                         case 2:
+                            Console.ForegroundColor = ConsoleColor.Green;
                             engraving = "Welcome.";
+                            Console.ForegroundColor = ConsoleColor.White;
                             break;
                         case 3:
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
                             engraving = "TURN BACK!!!";
+                            Console.ForegroundColor = ConsoleColor.White;
                             break;
                     }
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("You come across an engraving. The engraving says: " + engraving);
                     if (engraving == "WARNING!")
                     {
-                        Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                           Console.WriteLine("The warning sign has made you a bit stressed, which has increased your breathing.");
                         oxygenMins = (oxygenMins / 3) * 2;
                     }
                     if (engraving == "TURN BACK!!!")
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("The engraving has made you quite paranoid and significantly increased your breathing rate");
                         oxygenMins = oxygenMins / 2;
                     }
+                    Console.ForegroundColor = ConsoleColor.White;
                     LocationItem(p, s, planets);
 
                         Console.ReadLine();
                     }
                     if (detailIn == "a book")
                     {
-                        Console.WriteLine("You can read this language, you leave the book.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("You cant read this language, you leave the book.");
+                    Console.ForegroundColor = ConsoleColor.White;
                         oxygenMins = oxygenMins - 2;
                         LocationItem(p,s,planets);
                     }
-                    Console.WriteLine("You return to the ship");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You return to the ship");
+                Console.ForegroundColor = ConsoleColor.White;
                     ShipReturn(p,s,planets);
                     Console.ReadLine();
                 }
@@ -1512,6 +1598,12 @@ namespace AdventureGame
             Console.WriteLine(gameOverLogo);
             Console.WriteLine("You died.");
             Console.ForegroundColor = ConsoleColor.White;
+            Console.ReadLine();
+            Console.Clear();
+            StartUp();
+
+
+
 
         }
 
@@ -1547,7 +1639,7 @@ namespace AdventureGame
             while (p.inShip == true)
             {
 
-                QuestCaller(planets, s, p);
+                //QuestCaller(planets, s, p);
                 CmdList(p);
 
                 string input = Console.ReadLine().ToLower();
